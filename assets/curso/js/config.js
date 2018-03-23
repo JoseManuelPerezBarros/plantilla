@@ -2,55 +2,67 @@ let infocurso = {
 	'nombre_curso': 'nombre_curso_prueba',
 	'descripcion': 'descripcion',
 	'codigo_curso': 'codigo_prueba',
+	'tiempo': 1000, //en milisegundos
+	//La propiedad archivo debe de usar el siguiente formato: /[a-zA-Z]?\d{2,}\.html/i
 	'temas': [{
 			'nombre': 'prueba1',
 			'codigo': null,
-			'archivo': 'a001.html'
+			'archivo': 'a001.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba2',
 			'codigo': null,
-			'archivo': 'a002.html'
+			'archivo': 'a002.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba3',
 			'codigo': null,
-			'archivo': 'a003.html'
+			'archivo': 'a003.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba4',
 			'codigo': null,
-			'archivo': 'a004.html'
+			'archivo': 'a004.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba5',
 			'codigo': null,
-			'archivo': 'a005.html'
+			'archivo': 'a005.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba6',
 			'codigo': null,
-			'archivo': 'a006.html'
+			'archivo': 'a006.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba7',
 			'codigo': null,
-			'archivo': 'a007.html'
+			'archivo': 'a007.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba8',
 			'codigo': null,
-			'archivo': 'a008.html'
+			'archivo': 'a008.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba9',
 			'codigo': null,
-			'archivo': 'a009.html'
+			'archivo': 'a009.html',
+			'needtime': true
 		},
 		{
 			'nombre': 'prueba10',
 			'codigo': null,
-			'archivo': 'a0010.html'
+			'archivo': 'a0010.html',
+			'needtime': true
 		}
 
 	]
@@ -61,6 +73,12 @@ class Curso {
 		this.tema_nombre = null;
 		this.tema_archivo = null;
 		this.activo = null;
+		//this.temaCompletado = [];
+		this.estado = {};
+	}
+
+	get curso() {
+		return infocurso;
 	}
 
 	get nombre() {
@@ -88,6 +106,10 @@ class Curso {
 
 	get lista() {
 		return document.getElementById('slide-out');
+	}
+
+	completado() {
+		console.log("hola");
 	}
 
 }

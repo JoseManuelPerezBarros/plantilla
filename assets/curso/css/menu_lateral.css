@@ -11,3 +11,6 @@ footer {
     padding-left: 0;
   }
 }
+.btn:hover, .btn-large:hover {
+	background-color: #00bcd4;
+}

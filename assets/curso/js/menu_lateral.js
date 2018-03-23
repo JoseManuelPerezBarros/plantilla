@@ -26,34 +26,55 @@ cur.temas.forEach((tema, index) => {
     elemento.classList.add('hoverable')
     lista.appendChild(elemento);
     cur.actual = tema.archivo;
+    //elemento.parentElement.firstElementChild
     elemento.onclick = setTema
+    //lista.classList.con
     if (index == 0) {
         elemento.click();
     }
+
 });
 
 function setTema(elemen) {
-    document.getElementsByClassName('tema')[0].src = cur.temas[this.getAttribute('data-index')].archivo;
-    cur.ultimoClick = this.getAttribute('data-index');
+    let presente = document.getElementsByClassName('tema')[0].src;
+    let pasado = cur.temas[this.getAttribute('data-index')].archivo;
+    if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
+
+        document.getElementsByClassName('tema')[0].src = pasado;
+        cur.ultimoClick = this.getAttribute('data-index');
+        if (cur.temas[this.getAttribute('data-index')].needtime) {
+            //cur.estado = {num,true}
+            setTimeout(() => {
+                cur.completado();
+            }, cur.curso.tiempo, cur);
+        }
 
 
-    if (cur.ultimoClick == 0) {
-        document.querySelector(".anterior").classList.add('disabled')
-    } else {
-        document.querySelector(".anterior").classList.remove('disabled')
+
+        if (cur.ultimoClick == 0) {
+            document.querySelector(".anterior").classList.add('disabled')
+        } else {
+            document.querySelector(".anterior").classList.remove('disabled')
+        }
+
+        if (cur.ultimoClick == cur.temas.length - 1) {
+            document.querySelector(".siguiente").classList.add('disabled')
+        } else {
+            document.querySelector(".siguiente").classList.remove('disabled')
+        }
     }
 
-    if (cur.ultimoClick == cur.temas.length - 1) {
-        document.querySelector(".siguiente").classList.add('disabled')
-    } else {
-        document.querySelector(".siguiente").classList.remove('disabled')
-    }
+
+
+
+
 
 }
 
 document.querySelector(".anterior").addEventListener('click', () => {
     if (cur.ultimoClick > 0) {
         lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click()
+        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
     }
 });
 
