@@ -6,10 +6,10 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
     } else {
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
     }
-    if (document.querySelector('.button-collapse .material-icons').textContent == 'arrow_back') {
-        document.querySelector('.button-collapse .material-icons').textContent = 'arrow_forward'
+    if (document.querySelector('.button-collapse .material-icons').textContent == 'keyboard_arrow_left') {
+        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_right'
     } else {
-        document.querySelector('.button-collapse .material-icons').textContent = 'arrow_back'
+        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_left'
     }
 })
 
@@ -32,7 +32,7 @@ cur.temas.forEach((tema, index) => {
     elemento.setAttribute('data-index', index);
     elemento.classList.add('hoverable');
     lista.appendChild(elemento);
-    cur.actual = tema.archivo;
+    //cur.actual = tema.archivo;
     //elemento.parentElement.firstElementChild
     elemento.onclick = setTema
     //lista.classList.con

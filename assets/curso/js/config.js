@@ -2,7 +2,7 @@ let infocurso = {
 	'nombre_curso': 'nombre_curso_prueba',
 	'descripcion': 'descripcion',
 	'codigo_curso': 'codigo_prueba',
-	'tiempo': 1000, //en milisegundos
+	'tiempo': 10000, //en milisegundos
 	//La propiedad archivo debe de usar el siguiente formato: /[a-zA-Z]?\d{2,}\.html/i
 	'temas': [{
 			'nombre': 'prueba1',
@@ -115,6 +115,7 @@ class Curso {
 
 	completado() {
 		console.log("hola");
+		document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 	}
 
 }
