@@ -16,14 +16,21 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
 let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
+    let hecho = document.createElement('i');
     let enlace = document.createElement('a');
     let elemento = document.createElement('li');
     let texto = document.createTextNode(tema.nombre);
+
+    hecho.classList.add("material-icons");
+    hecho.classList.add("green-text");
+    imgcheck = document.createTextNode("check_box_outline_blank");
     enlace.href = '#!';
+    hecho.appendChild(imgcheck);
+    enlace.appendChild(hecho);
     enlace.appendChild(texto);
     elemento.appendChild(enlace);
-    elemento.setAttribute('data-index', index)
-    elemento.classList.add('hoverable')
+    elemento.setAttribute('data-index', index);
+    elemento.classList.add('hoverable');
     lista.appendChild(elemento);
     cur.actual = tema.archivo;
     //elemento.parentElement.firstElementChild

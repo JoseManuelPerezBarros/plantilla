@@ -73,8 +73,8 @@ class Curso {
 		this.tema_nombre = null;
 		this.tema_archivo = null;
 		this.activo = null;
-		//this.temaCompletado = [];
-		this.estado = {};
+		this.temaCompletado = [];
+		this.startTemp = {};
 	}
 
 	get curso() {
@@ -107,6 +107,11 @@ class Curso {
 	get lista() {
 		return document.getElementById('slide-out');
 	}
+
+	/*set startTemp (info)
+	{
+		this.startTemp=info;
+	}*/
 
 	completado() {
 		console.log("hola");
