@@ -118,5 +118,38 @@ class Curso {
 		document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 	}
 
+	crearElementoLista(tema,index)
+	{	
+		let check = document.createTextNode("check_box_outline_blank");
+		let estadoTema = document.createElement("i");
+		estadoTema.classList.add("material-icons");
+		estadoTema.classList.add("green-text");
+		estadoTema.appendChild(check);
+
+		let textoEnlace = document.createTextNode(tema.nombre);
+		let span = document.createElement("span");
+		span.appendChild(textoEnlace);
+
+		let enlace = document.createElement("a");
+		enlace.href = "#!";
+		enlace.appendChild(estadoTema);
+		enlace.appendChild(span);
+
+		let col = document.createElement("div");
+		col.classList.add("col");
+		col.classList.add("s12");
+		col.appendChild(enlace);
+
+		let row = document.createElement("div");
+		row.classList.add("row");
+		row.appendChild(col);
+
+		let li = document.createElement("li");
+		li.setAttribute("data-index",index);
+		li.classList.add("hoverable");
+		li.appendChild(row);
+
+		return li;
+	}
 }
 var cur = new Curso();

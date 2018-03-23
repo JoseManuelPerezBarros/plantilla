@@ -13,10 +13,10 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
     }
 })
 
-let lista = cur.lista;
 
+let lista = cur.lista;
 cur.temas.forEach((tema, index) => {
-    let hecho = document.createElement('i');
+    /*let hecho = document.createElement('i');
     let enlace = document.createElement('a');
     let elemento = document.createElement('li');
     let texto = document.createTextNode(tema.nombre);
@@ -31,11 +31,12 @@ cur.temas.forEach((tema, index) => {
     elemento.appendChild(enlace);
     elemento.setAttribute('data-index', index);
     elemento.classList.add('hoverable');
+    lista.appendChild(elemento);*/
+    let elemento = cur.crearElementoLista(tema,index);
+    
     lista.appendChild(elemento);
-    //cur.actual = tema.archivo;
-    //elemento.parentElement.firstElementChild
+
     elemento.onclick = setTema
-    //lista.classList.con
     if (index == 0) {
         elemento.click();
     }
@@ -56,8 +57,6 @@ function setTema(elemen) {
             }, cur.curso.tiempo, cur);
         }
 
-
-
         if (cur.ultimoClick == 0) {
             document.querySelector(".anterior").classList.add('disabled')
         } else {
@@ -70,11 +69,6 @@ function setTema(elemen) {
             document.querySelector(".siguiente").classList.remove('disabled')
         }
     }
-
-
-
-
-
 
 }
 
