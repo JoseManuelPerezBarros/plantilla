@@ -15,10 +15,10 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
 
 
 let lista = cur.lista;
+
 cur.temas.forEach((tema, index) => {
 
     let elemento = cur.crearElementoLista(tema, index);
-
     lista.appendChild(elemento);
 
     elemento.onclick = setTema
@@ -29,30 +29,48 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
+
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado = cur.temas[this.getAttribute('data-index')].archivo;
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
-        if(cur.ultimoClick === null)
-        {
+
+        if (cur.ultimoClick === null) {
+            cur.temaProgreso.push({
+                'indice': 0,
+                'activo': true
+            });
+            //cur.estadoPasado=0;
             this.classList.add("active");
-        }
-        else
-        {
+        } else {
             document.querySelector('.active').classList.toggle("active");
         }
-        
+
         document.getElementsByClassName('tema')[0].src = pasado;
-        cur.ultimoClick = this.getAttribute('data-index');
+
+        cur.ultimoClick = parseInt(this.getAttribute('data-index'));
+
+        /*cur.temaProgreso.some((el, ind, arr) => {
+            if (el.indice == cur.ultimoClick) {
+                el.activo = false;
+                return true;
+            } else {
+                return false;
+            }
+        })*/
+
+        if (cur.temaProgreso.length > 1) {
+            cur.temaProgreso[cur.temaProgreso.length - 1].activo = false;
+        }
+        cur.temaProgreso.push({
+            'indice': cur.ultimoClick,
+            'activo': true
+        });
+
         this.classList.add("active");
 
         cur.actualizanumpag(parseInt(cur.ultimoClick) + 1);
 
-        if (cur.temas[this.getAttribute('data-index')].needtime) {
-            //cur.estado = {num,true}
-            setTimeout(() => {
-                cur.completado();
-            }, cur.curso.tiempo, cur);
-        }
+        cur.gestionaTiempo(this, cur.temaProgreso[cur.temaProgreso.length - 1]);
 
         if (cur.ultimoClick == 0) {
             document.querySelector(".anterior").classList.add('disabled')
