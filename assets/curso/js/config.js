@@ -113,13 +113,9 @@ class Curso {
 		this.startTemp=info;
 	}*/
 
-	completado() {
-		console.log("hola");
-		document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
-	}
+	
 
-	crearElementoLista(tema,index)
-	{	
+	crearElementoLista(tema, index) {
 		let check = document.createTextNode("check_box_outline_blank");
 		let estadoTema = document.createElement("i");
 		estadoTema.classList.add("material-icons");
@@ -145,11 +141,22 @@ class Curso {
 		row.appendChild(col);
 
 		let li = document.createElement("li");
-		li.setAttribute("data-index",index);
+		li.setAttribute("data-index", index);
 		li.classList.add("hoverable");
 		li.appendChild(row);
 
 		return li;
+	}
+
+	actualizanumpag(pagina)
+	{
+		let pag = document.querySelector('.numpag p');
+		pag.textContent=`${pagina}/${this.temas.length}`;
+	}
+
+	completado() {
+		console.log("hola");
+		document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 	}
 }
 var cur = new Curso();

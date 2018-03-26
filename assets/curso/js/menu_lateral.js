@@ -16,24 +16,9 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
 
 let lista = cur.lista;
 cur.temas.forEach((tema, index) => {
-    /*let hecho = document.createElement('i');
-    let enlace = document.createElement('a');
-    let elemento = document.createElement('li');
-    let texto = document.createTextNode(tema.nombre);
 
-    hecho.classList.add("material-icons");
-    hecho.classList.add("green-text");
-    imgcheck = document.createTextNode("check_box_outline_blank");
-    enlace.href = '#!';
-    hecho.appendChild(imgcheck);
-    enlace.appendChild(hecho);
-    enlace.appendChild(texto);
-    elemento.appendChild(enlace);
-    elemento.setAttribute('data-index', index);
-    elemento.classList.add('hoverable');
-    lista.appendChild(elemento);*/
-    let elemento = cur.crearElementoLista(tema,index);
-    
+    let elemento = cur.crearElementoLista(tema, index);
+
     lista.appendChild(elemento);
 
     elemento.onclick = setTema
@@ -47,9 +32,21 @@ function setTema(elemen) {
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado = cur.temas[this.getAttribute('data-index')].archivo;
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
-
+        if(cur.ultimoClick === null)
+        {
+            this.classList.add("active");
+        }
+        else
+        {
+            document.querySelector('.active').classList.toggle("active");
+        }
+        
         document.getElementsByClassName('tema')[0].src = pasado;
         cur.ultimoClick = this.getAttribute('data-index');
+        this.classList.add("active");
+
+        cur.actualizanumpag(parseInt(cur.ultimoClick) + 1);
+
         if (cur.temas[this.getAttribute('data-index')].needtime) {
             //cur.estado = {num,true}
             setTimeout(() => {
@@ -59,20 +56,25 @@ function setTema(elemen) {
 
         if (cur.ultimoClick == 0) {
             document.querySelector(".anterior").classList.add('disabled')
+            document.querySelector(".principio").classList.add('disabled')
         } else {
             document.querySelector(".anterior").classList.remove('disabled')
+            document.querySelector(".principio").classList.remove('disabled')
         }
 
         if (cur.ultimoClick == cur.temas.length - 1) {
             document.querySelector(".siguiente").classList.add('disabled')
+            document.querySelector(".final").classList.add('disabled')
         } else {
             document.querySelector(".siguiente").classList.remove('disabled')
+            document.querySelector(".final").classList.remove('disabled')
         }
     }
 
 }
 
 document.querySelector(".anterior").addEventListener('click', () => {
+
     if (cur.ultimoClick > 0) {
         lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click()
         //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
@@ -86,3 +88,18 @@ document.querySelector(".siguiente").addEventListener('click', () => {
     }
 
 });
+
+document.querySelector(".principio").addEventListener('click', () => {
+
+    if (cur.ultimoClick > 0) {
+        lista.getElementsByTagName('li').item(0).click()
+        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
+    }
+});
+
+document.querySelector(".final").addEventListener('click', () => {
+
+    if (cur.ultimoClick < cur.temas.length) {
+        lista.getElementsByTagName('li').item(cur.temas.length - 1).click()
+    }
+})
