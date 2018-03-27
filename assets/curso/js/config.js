@@ -88,7 +88,6 @@ let infocurso = {
 			'archivo': 'a0010.html',
 			'needtime': true
 		}
-
 	]
 };
 
@@ -100,7 +99,7 @@ class Curso {
 		this.temaCompletado = [];
 		this.startTemp = {};
 		infocurso.temas.sort((a, b) => a.id - b.id)
-		this.temaProgreso = [{}];
+		this.temaProgreso = [];
 	}
 
 	get curso() {
@@ -208,27 +207,6 @@ class Curso {
 				this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 			}
 		}
-
 	}
 }
 var cur = new Curso();
-
-/*pos = function(pos){
-
-	this.posp = pos;
-	this.algo = null;
-	this.getpos = function()
-	{
-		return this.posp;
-	}
-
-	this.setpos = function(pos)
-	{
-		this.posp = pos;
-	}
-}
-document.getAttribute
-p = new pos();
-console.log(p.getpos());
-p.setpos(4);
-console.log(p.getpos()) */
