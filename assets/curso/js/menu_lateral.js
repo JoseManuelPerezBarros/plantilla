@@ -29,16 +29,18 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
+    
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado = cur.temas[this.getAttribute('data-index')].archivo;
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
         if (cur.ultimoClick === null) {
-            cur.temaProgreso.push({
+            /*cur.temaProgreso.push({
                 'indice': 0,
                 'activo': true
-            });
+            });*/
+            cur.temaProgreso.splice(0,1);
             //cur.estadoPasado=0;
             this.classList.add("active");
         } else {
@@ -57,14 +59,24 @@ function setTema(elemen) {
                 return false;
             }
         })*/
-
-        if (cur.temaProgreso.length > 1) {
-            cur.temaProgreso[cur.temaProgreso.length - 1].activo = false;
-        }
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
             'activo': true
         });
+        console.log(cur.temaProgreso)
+        if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice) ) {
+            cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
+            if(cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.contains("green-text"))
+            {
+                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.remove("green-text")
+                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.add("orange-text")
+            }
+            cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").textContent = "indeterminate_check_box"
+        }
+        /*cur.temaProgreso.push({
+            'indice': cur.ultimoClick,
+            'activo': true
+        });*/
 
         this.classList.add("active");
 

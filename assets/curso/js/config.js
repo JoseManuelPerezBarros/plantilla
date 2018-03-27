@@ -199,13 +199,28 @@ class Curso {
 				setTimeout(() => {
 					//console.log(info);
 					if (info.activo && info.indice == this.ultimoClick) {
-						//TO-DO quitar del array los antiguos con array.splice
-						//TO-DO quitar del array lo que ya son completados y no entran aqui
+						//FUNCIONA sin esto; quitar del array los antiguos con array.splice
+						//FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
+						//TO-DO mejor responsive, 480px
+						//DONE cursor pointer, tooltips botones control
+						//TO-DO Añadir check indeterminado naranja cuando se accedió pero no se acabó
+						//TO-DO Varios tamaños de letra
+						//TO-DO Subtemas
+						//TO-DO Usar clearTimeOut
+						if(document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text"))
+						{
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
+						}
+						else
+						{
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
+						}
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 						this.temaProgreso.splice(-1);
 					} else {
-						document.querySelector("#slide-out").children.item(info.indice).querySelector("i").textContent = "indeterminate_check_box";
+						//document.querySelector("#slide-out").children.item(info.indice).querySelector("i").textContent = "indeterminate_check_box";
 						/*this.temaProgreso.forEach((ob) => {
 							Array.prototype.splice
 						});*/
