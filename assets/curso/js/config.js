@@ -2,7 +2,7 @@ let infocurso = {
 	'nombre_curso': 'nombre_curso_prueba',
 	'descripcion': 'descripcion',
 	'codigo_curso': 'codigo_prueba',
-	'tiempo': 10000, //en milisegundos
+	'tiempo': 5000, //en milisegundos
 	//La propiedad archivo debe de usar el siguiente formato: /[a-zA-Z]?\d{2,}\.html/i
 	// Padre o Subtemas ?
 	'temas': [{
@@ -46,7 +46,7 @@ let infocurso = {
 			'nombre': 'prueba5',
 			'codigo': null,
 			'archivo': 'a005.html',
-			'needtime': true
+			'needtime': false
 		},
 		{
 			'id': 55,
@@ -192,6 +192,7 @@ class Curso {
 		//console.log(this.estadoPasado.indice);
 		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
 			console.log("hola");
+			//console.log(this.curso.tiempo);
 			if (this.temas[elemento.getAttribute('data-index')].needtime) {
 
 				setTimeout(() => {
@@ -201,15 +202,13 @@ class Curso {
 						//TO-DO quitar del array lo que ya son completados y no entran aqui
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
+						this.temaProgreso.splice(-1);
 					} else {
-						this.temaProgreso.forEach((ob) => {
+						/*this.temaProgreso.forEach((ob) => {
 							Array.prototype.splice
-						});
+						});*/
 					}
-
-					//console.log(`Presente  ${this.estadoPresente.indice}`);
-					//console.log(`Pasado  ${this.estadoPasado.indice}`);
-				}, 1000, this, info);
+				}, this.curso.tiempo, this, info);
 
 			} else {
 				document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
