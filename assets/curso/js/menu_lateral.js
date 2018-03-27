@@ -36,12 +36,7 @@ function setTema(elemen) {
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
         if (cur.ultimoClick === null) {
-            /*cur.temaProgreso.push({
-                'indice': 0,
-                'activo': true
-            });*/
             cur.temaProgreso.splice(0,1);
-            //cur.estadoPasado=0;
             this.classList.add("active");
         } else {
             document.querySelector('.active').classList.toggle("active");
@@ -73,10 +68,6 @@ function setTema(elemen) {
             }
             cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").textContent = "indeterminate_check_box"
         }
-        /*cur.temaProgreso.push({
-            'indice': cur.ultimoClick,
-            'activo': true
-        });*/
 
         this.classList.add("active");
 
@@ -123,7 +114,6 @@ document.querySelector(".principio").addEventListener('click', () => {
 
     if (cur.ultimoClick > 0) {
         lista.getElementsByTagName('li').item(0).click()
-        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
     }
 });
 

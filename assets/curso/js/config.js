@@ -99,14 +99,6 @@ class Curso {
 		this.activo = null;
 		this.temaCompletado = [];
 		this.startTemp = {};
-		this.estadoPasado = {
-			'indice': null,
-			'activo': false
-		};
-		this.estadoPresente = {
-			'indice': null,
-			'activo': false
-		};
 		infocurso.temas.sort((a, b) => a.id - b.id)
 		this.temaProgreso = [{}];
 	}
@@ -142,11 +134,6 @@ class Curso {
 	get lista() {
 		return document.getElementById('slide-out');
 	}
-
-	/*set startTemp (info)
-	{
-		this.startTemp=info;
-	}*/
 
 	crearElementoLista(tema, index) {
 		let check = document.createTextNode("check_box_outline_blank");
@@ -187,13 +174,10 @@ class Curso {
 	}
 
 	gestionaTiempo(elemento, info) {
-		//indeterminate_check_box
 
 		elemento.getAttribute("data-index")
-		//console.log(this.estadoPasado.indice);
 		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
 			console.log("hola");
-			//console.log(this.curso.tiempo);
 			if (this.temas[elemento.getAttribute('data-index')].needtime) {
 
 				setTimeout(() => {
@@ -203,27 +187,19 @@ class Curso {
 						//FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
 						//TO-DO mejor responsive, 480px
 						//DONE cursor pointer, tooltips botones control
-						//TO-DO Añadir check indeterminado naranja cuando se accedió pero no se acabó
+						//DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
 						//TO-DO Varios tamaños de letra
 						//TO-DO Subtemas
 						//TO-DO Usar clearTimeOut
-						if(document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text"))
-						{
+						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
-						}
-						else
-						{
+						} else {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
 						}
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 						this.temaProgreso.splice(-1);
-					} else {
-						//document.querySelector("#slide-out").children.item(info.indice).querySelector("i").textContent = "indeterminate_check_box";
-						/*this.temaProgreso.forEach((ob) => {
-							Array.prototype.splice
-						});*/
 					}
 				}, this.curso.tiempo, this, info);
 
