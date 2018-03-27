@@ -187,6 +187,7 @@ class Curso {
 	}
 
 	gestionaTiempo(elemento, info) {
+		//indeterminate_check_box
 
 		elemento.getAttribute("data-index")
 		//console.log(this.estadoPasado.indice);
@@ -204,6 +205,7 @@ class Curso {
 						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 						this.temaProgreso.splice(-1);
 					} else {
+						document.querySelector("#slide-out").children.item(info.indice).querySelector("i").textContent = "indeterminate_check_box";
 						/*this.temaProgreso.forEach((ob) => {
 							Array.prototype.splice
 						});*/
