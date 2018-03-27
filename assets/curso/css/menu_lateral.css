@@ -35,6 +35,11 @@ footer {
   line-height: 30px;
   padding-top: 3px;
   padding-bottom: 3px;
+  
+}
+#slide-out.side-nav li:hover {
+  cursor: pointer;
+  
 }
 
 #slide-out.side-nav .row {
