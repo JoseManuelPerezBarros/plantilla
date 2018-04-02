@@ -140,6 +140,8 @@ class Curso {
 	}
 
 	crearElementoLista(tema, index) {
+		
+
 		let check = document.createTextNode("check_box_outline_blank");
 		let estadoTema = document.createElement("i");
 		estadoTema.classList.add("material-icons");
@@ -159,6 +161,15 @@ class Curso {
 		col.classList.add("col");
 		col.classList.add("s12");
 		col.appendChild(enlace);
+
+
+		let sublista= document.createElement("ul");
+		if(tema.subtemas && tema.subtemas.length > 0)
+		{
+			tema.subtemas.forEach((element, subindice) => {
+				this.crearElementoLista(element,subindice)
+			});
+		};
 
 		let row = document.createElement("div");
 		row.classList.add("row");
@@ -181,7 +192,7 @@ class Curso {
 
 		elemento.getAttribute("data-index")
 		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
-			console.log("hola");
+			//console.log("hola");
 			if (this.temas[elemento.getAttribute('data-index')].needtime) {
 
 				setTimeout(() => {
