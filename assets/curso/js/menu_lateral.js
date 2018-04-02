@@ -18,9 +18,12 @@ let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
 
+
     let elemento = cur.crearElementoLista(tema, index);
 
     lista.appendChild(elemento);
+    cur.crearSubtemas(tema, lista);
+    
 
     elemento.onclick = setTema
     if (index == 0) {
@@ -30,6 +33,7 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
+    //console.dir(this);
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado = cur.temas[this.getAttribute('data-index')].archivo;
@@ -75,19 +79,19 @@ function setTema(elemen) {
         cur.gestionaTiempo(this, cur.temaProgreso[cur.temaProgreso.length - 1]);
 
         if (cur.ultimoClick == 0) {
-            document.querySelector(".anterior").classList.add('disabled')
-            document.querySelector(".principio").classList.add('disabled')
+            document.querySelector(".anterior").classList.add('disabled');
+            document.querySelector(".principio").classList.add('disabled');
         } else {
-            document.querySelector(".anterior").classList.remove('disabled')
-            document.querySelector(".principio").classList.remove('disabled')
+            document.querySelector(".anterior").classList.remove('disabled');
+            document.querySelector(".principio").classList.remove('disabled');
         }
 
         if (cur.ultimoClick == cur.temas.length - 1) {
-            document.querySelector(".siguiente").classList.add('disabled')
-            document.querySelector(".final").classList.add('disabled')
+            document.querySelector(".siguiente").classList.add('disabled');
+            document.querySelector(".final").classList.add('disabled');
         } else {
-            document.querySelector(".siguiente").classList.remove('disabled')
-            document.querySelector(".final").classList.remove('disabled')
+            document.querySelector(".siguiente").classList.remove('disabled');
+            document.querySelector(".final").classList.remove('disabled');
         }
     }
 }
@@ -103,7 +107,7 @@ document.querySelector(".anterior").addEventListener('click', () => {
 
 document.querySelector(".siguiente").addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.temas.length -1) {
+    if (cur.ultimoClick < cur.temas.length - 1) {
         lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click()
     }
 

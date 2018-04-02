@@ -19,11 +19,12 @@ footer {
 
 #slide-out.side-nav i,
 #slide-out.side-nav span {
-  vertical-align: middle;
+ vertical-align: middle;
 }
 
 #slide-out.side-nav a {
   color: rgba(0, 0, 0, 0.87);
+  /*color: #6487e7;*/
   padding-left: 5px;
 }
 
@@ -43,5 +44,5 @@ footer {
 }
 
 #slide-out.side-nav .row {
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }

@@ -18,7 +18,15 @@ let infocurso = {
 				'nombre': 'pruebaHijo',
 				'codigo': null,
 				'archivo': 'a0020.html',
-				'needtime': true
+				'needtime': true,
+				'subtemas': [{
+					'id': 102,
+					'padre': null,
+					'nombre': 'pruebaNieto',
+					'codigo': null,
+					'archivo': 'a0021.html',
+					'needtime': true
+				}]
 			}]
 		},
 		{
@@ -139,8 +147,36 @@ class Curso {
 		return document.getElementById('slide-out');
 	}
 
+	crearSubtemas(tema, lista) {
+		if (tema.subtemas && tema.subtemas.length > 0) {
+
+			let sublista = document.createElement('ul');
+			sublista.classList.add('subtema');
+
+			let col = document.createElement("div");
+			col.classList.add("col");
+			col.classList.add("s12");
+
+			let row = document.createElement("div");
+			row.classList.add("row");
+
+
+			tema.subtemas.forEach((subtema, subindex) => {
+				let subelemento = this.crearElementoLista(subtema, subindex)
+				subelemento.onclick = setTema;
+				sublista.appendChild(subelemento);
+				if (subtema.subtemas && subtema.subtemas.length > 0) {
+					this.crearSubtemas(subtema, sublista);
+				}
+			});
+			col.appendChild(sublista);
+			row.appendChild(col);
+			lista.appendChild(row);
+		}
+	}
+
 	crearElementoLista(tema, index) {
-		
+
 
 		let check = document.createTextNode("check_box_outline_blank");
 		let estadoTema = document.createElement("i");
@@ -161,15 +197,6 @@ class Curso {
 		col.classList.add("col");
 		col.classList.add("s12");
 		col.appendChild(enlace);
-
-
-		let sublista= document.createElement("ul");
-		if(tema.subtemas && tema.subtemas.length > 0)
-		{
-			tema.subtemas.forEach((element, subindice) => {
-				this.crearElementoLista(element,subindice)
-			});
-		};
 
 		let row = document.createElement("div");
 		row.classList.add("row");
@@ -205,9 +232,11 @@ class Curso {
 						//DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
 						//DONE Varios tamaños de letra texto contenido
 						//TO-DO Varios tamaños letra encabezados
-						//TO-DO Subtemas
+						//TO-DO aria-labels
+						//WORKING Subtemas
 						//TO-DO Usar clearTimeOut
 						//TO-DO Tutorial materialize css
+						//TO-DO Funcional con subtemas recursivos
 						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
