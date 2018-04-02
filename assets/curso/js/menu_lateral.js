@@ -90,7 +90,6 @@ function setTema(elemen) {
             document.querySelector(".final").classList.remove('disabled')
         }
     }
-
 }
 
 document.querySelector(".anterior").addEventListener('click', () => {
@@ -101,12 +100,22 @@ document.querySelector(".anterior").addEventListener('click', () => {
     }
 });
 
+
 document.querySelector(".siguiente").addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.temas.length) {
+    if (cur.ultimoClick < cur.temas.length -1) {
         lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click()
     }
 
+});
+
+document.addEventListener('keyup', (e) => {
+
+    if (e.keyCode == 39 || e.which == 39) {
+        document.querySelector(".siguiente").click();
+    } else if (e.keyCode == 37 || e.which == 37) {
+        document.querySelector(".anterior").click();
+    }
 });
 
 document.querySelector(".principio").addEventListener('click', () => {
