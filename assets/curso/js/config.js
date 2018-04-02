@@ -13,7 +13,12 @@ let infocurso = {
 			'archivo': 'a001.html',
 			'needtime': true,
 			'subtemas': [{
-
+				'id': 100,
+				'padre': null,
+				'nombre': 'pruebaHijo',
+				'codigo': null,
+				'archivo': 'a0020.html',
+				'needtime': true
 			}]
 		},
 		{
@@ -187,9 +192,11 @@ class Curso {
 						//TO-DO mejor responsive, 480px
 						//DONE cursor pointer, tooltips botones control
 						//DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
-						//TO-DO Varios tamaños de letra
+						//DONE Varios tamaños de letra texto contenido
+						//TO-DO Varios tamaños letra encabezados
 						//TO-DO Subtemas
 						//TO-DO Usar clearTimeOut
+						//TO-DO Tutorial materialize css
 						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
