@@ -26,6 +26,13 @@ let infocurso = {
 					'codigo': null,
 					'archivo': 'a0021.html',
 					'needtime': true
+				}, {
+					'id': 103,
+					'padre': null,
+					'nombre': 'pruebaNieto2',
+					'codigo': null,
+					'archivo': 'a0022.html',
+					'needtime': true
 				}]
 			}]
 		},
@@ -113,6 +120,9 @@ class Curso {
 		this.startTemp = {};
 		infocurso.temas.sort((a, b) => a.id - b.id)
 		this.temaProgreso = [];
+		this.contSubtema = 'z';
+		/*this.profundidad = 0;
+		this.indice = 0;*/
 	}
 
 	get curso() {
@@ -147,6 +157,26 @@ class Curso {
 		return document.getElementById('slide-out');
 	}
 
+	/*get profundidad()
+	{
+		return this.profundidad;
+	}
+
+	set profundidad(pr)
+	{
+		this.profundidad = pr;
+	}
+
+	get indice()
+	{
+		return this.indice;
+	}
+
+	set indice(ind)
+	{
+		this.indice = ind;
+	}*/
+
 	crearSubtemas(tema, lista) {
 		if (tema.subtemas && tema.subtemas.length > 0) {
 
@@ -162,13 +192,15 @@ class Curso {
 
 
 			tema.subtemas.forEach((subtema, subindex) => {
-				let subelemento = this.crearElementoLista(subtema, subindex)
+				let subelemento = this.crearElementoLista(subtema, this.contSubtema + subindex)
 				subelemento.onclick = setTema;
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
+					this.contSubtema += this.contSubtema;
 					this.crearSubtemas(subtema, sublista);
 				}
 			});
+			this.contSubtema = this.contSubtema.charAt(0);
 			col.appendChild(sublista);
 			row.appendChild(col);
 			lista.appendChild(row);
@@ -217,10 +249,10 @@ class Curso {
 
 	gestionaTiempo(elemento, info) {
 
-		elemento.getAttribute("data-index")
-		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
+		//elemento.this.separaDataindex(elemento.getAttribute('data-index')).indice
+		if (!this.temaCompletado.includes(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice))) {
 			//console.log("hola");
-			if (this.temas[elemento.getAttribute('data-index')].needtime) {
+			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index')).indice].needtime) {
 
 				setTimeout(() => {
 					//console.log(info);
@@ -244,15 +276,34 @@ class Curso {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
 						}
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
-						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
+						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice));
 						this.temaProgreso.splice(-1);
 					}
 				}, this.curso.tiempo, this, info);
 
 			} else {
 				document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
-				this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
+				this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice));
 			}
+		}
+	}
+
+	separaDataindex(dato) {
+
+		let prof = dato.lastIndexOf(this.contSubtema);
+		let ind;
+		if (prof === -1)
+			ind = dato.substring(prof)
+		else
+			ind = dato.substring(prof + 1)
+		/*let resultado = {
+			'profundidad': prof + 1,
+			'indice': ind
+		};
+		console.table(resultado);*/
+		return {
+			'profundidad': prof + 1,
+			'indice': ind
 		}
 	}
 }
