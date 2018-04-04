@@ -36,7 +36,7 @@ cur.temas.forEach((tema, index) => {
 function setTema(elemen) {
     //console.log(this)
     let indice = cur.separaDataindex(this.getAttribute('data-index')).indice;
-    let profundidad = cur.separaDataindex(this.getAttribute('data-index')).profundidad;
+    let profundidad = cur.separaDataindex(this.getAttribute('data-index')).ancentros.length;
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;

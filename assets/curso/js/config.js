@@ -259,31 +259,15 @@ class Curso {
 
 	separaDataindex(dato) {
 		let oc = dato.split('-');
-		let index,padre = oc;
-		console.log(index);
-		console.log(padre);
 
-		let padre = 0;
-		let prof = dato.lastIndexOf(this.contSubtema);
-		let ind;
-		if (prof === -1) {
-			ind = dato.substring(prof)
-			padre = -1;
-		} else {
-			ind = dato.substring(prof + 1)
-
+		let ancestros = [];
+		for (let i = oc.length - 2; i >= 0; i--) {
+			ancestros.push(oc[i])
 		}
-
-		/*let resultado = {
-			'profundidad': prof + 1,
-			'indice': ind
-		};
-		console.table(resultado);*/
 		return {
-			'profundidad': prof + 1,
-			'indice': ind,
-			'padre': padre
-		}
+			'indice': oc[oc.length - 1],
+			'ancentros': ancestros
+		};
 	}
 
 	buscarArchivo(indice, profundidad) {
