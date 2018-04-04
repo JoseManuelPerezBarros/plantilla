@@ -19,7 +19,7 @@ footer {
 
 #slide-out.side-nav i,
 #slide-out.side-nav span {
- vertical-align: middle;
+  vertical-align: middle;
 }
 
 #slide-out.side-nav a {
@@ -36,11 +36,10 @@ footer {
   line-height: 30px;
   padding-top: 3px;
   padding-bottom: 3px;
-  
 }
+
 #slide-out.side-nav li:hover {
   cursor: pointer;
-  
 }
 
 #slide-out.side-nav .row {

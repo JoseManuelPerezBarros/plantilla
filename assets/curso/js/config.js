@@ -270,7 +270,7 @@ class Curso {
 		};
 	}
 
-	buscarArchivo(indice, profundidad) {
+	getRutaCompleta(infoRutas) {
 		/*let resultado;
 		for(let i = 0; i < profundidad, i++)
 		{
@@ -290,4 +290,5 @@ var cur = new Curso();
 //WORKING Subtemas
 //TO-DO Usar clearTimeOut
 //TO-DO Tutorial materialize css
-//TO-DO Funcional con subtemas recursivos
+//TO-DO Funcional con subtemas recursivos ?
+//TO-DO funcion ruta completa
