@@ -19,10 +19,11 @@ let lista = cur.lista;
 cur.temas.forEach((tema, index) => {
 
 
+    //let elemento = cur.crearElementoLista(tema, '0-' + index);
     let elemento = cur.crearElementoLista(tema, index);
 
     lista.appendChild(elemento);
-    cur.crearSubtemas(tema, lista);
+    cur.crearSubtemas(tema, lista, index);
 
 
     elemento.onclick = setTema
@@ -34,17 +35,21 @@ cur.temas.forEach((tema, index) => {
 
 function setTema(elemen) {
     //console.log(this)
+    let indice = cur.separaDataindex(this.getAttribute('data-index')).indice;
+    let profundidad = cur.separaDataindex(this.getAttribute('data-index')).profundidad;
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
+
     //console.log(this.getAttribute('data-index').match(cur.contSubtema.charAt(0))[0]);
     console.log(cur.separaDataindex(this.getAttribute('data-index')))
-    if (cur.separaDataindex(this.getAttribute('data-index')).indice == 0) {
-        pasado = cur.temas[cur.separaDataindex(this.getAttribute('data-index')).indice].archivo;
+    /*if (profundidad == 0) {
+        pasado = cur.temas[indice].archivo;
     } else  {
-        pasado = cur.temas[cur.separaDataindex(this.getAttribute('data-index')).indice].archivo;
-    }
-    
+        pasado = cur.temas[indice].archivo;
+    }*/
+    //pasado = cur.buscaArchivo(indice,profundidad);
+    pasado = profundidad == 0 ? cur.temas[indice].archivo : cur.temas[indice].archivo
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
         if (cur.ultimoClick === null) {
@@ -56,7 +61,7 @@ function setTema(elemen) {
 
         document.getElementsByClassName('tema')[0].src = pasado;
 
-        cur.ultimoClick = parseInt(this.getAttribute('data-index'));
+        cur.ultimoClick = parseInt(cur.separaDataindex(this.getAttribute('data-index')).indice);
 
         /*cur.temaProgreso.some((el, ind, arr) => {
             if (el.indice == cur.ultimoClick) {
@@ -68,6 +73,7 @@ function setTema(elemen) {
         })*/
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
+            'profundidad': 0,
             'activo': true
         });
         //console.log(cur.temaProgreso)

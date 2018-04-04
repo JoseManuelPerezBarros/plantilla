@@ -115,14 +115,12 @@ class Curso {
 	constructor() {
 		this.tema_nombre = null;
 		this.tema_archivo = null;
-		this.activo = null;
+		this.activo = null; //Objeto con indice y profundidad
 		this.temaCompletado = [];
 		this.startTemp = {};
 		infocurso.temas.sort((a, b) => a.id - b.id)
 		this.temaProgreso = [];
-		this.contSubtema = 'z';
-		/*this.profundidad = 0;
-		this.indice = 0;*/
+		this.contSubtema = 1;
 	}
 
 	get curso() {
@@ -157,52 +155,38 @@ class Curso {
 		return document.getElementById('slide-out');
 	}
 
-	/*get profundidad()
-	{
-		return this.profundidad;
-	}
-
-	set profundidad(pr)
-	{
-		this.profundidad = pr;
-	}
-
-	get indice()
-	{
-		return this.indice;
-	}
-
-	set indice(ind)
-	{
-		this.indice = ind;
-	}*/
-
-	crearSubtemas(tema, lista) {
+	crearSubtemas(tema, lista, padre) {
 		if (tema.subtemas && tema.subtemas.length > 0) {
 
 			let sublista = document.createElement('ul');
 			sublista.classList.add('subtema');
+			sublista.classList.add('col');
+			sublista.classList.add('s12');
 
-			let col = document.createElement("div");
+			/*let col = document.createElement("div");
 			col.classList.add("col");
-			col.classList.add("s12");
+			col.classList.add("s12");*/
 
-			let row = document.createElement("div");
+			let row = document.createElement("li");
+			//let row = document.createElement("div");
 			row.classList.add("row");
-
+			row.classList.add("hijo");
 
 			tema.subtemas.forEach((subtema, subindex) => {
-				let subelemento = this.crearElementoLista(subtema, this.contSubtema + subindex)
+				//let subelemento = this.crearElementoLista(subtema, this.contSubtema + '-' + subindex+'-'+padre)
+				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`)
 				subelemento.onclick = setTema;
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
-					this.contSubtema += this.contSubtema;
-					this.crearSubtemas(subtema, sublista);
+					//this.contSubtema++;
+
+					this.crearSubtemas(subtema, sublista, `${padre}-${subindex}`);
 				}
 			});
-			this.contSubtema = this.contSubtema.charAt(0);
-			col.appendChild(sublista);
-			row.appendChild(col);
+			//this.contSubtema = 1;
+			/*col.appendChild(sublista);
+			row.appendChild(col);*/
+			row.appendChild(sublista);
 			lista.appendChild(row);
 		}
 	}
@@ -237,6 +221,7 @@ class Curso {
 		let li = document.createElement("li");
 		li.setAttribute("data-index", index);
 		li.classList.add("hoverable");
+		li.classList.add("padre");
 		li.appendChild(row);
 
 		return li;
@@ -249,26 +234,10 @@ class Curso {
 
 	gestionaTiempo(elemento, info) {
 
-		//elemento.this.separaDataindex(elemento.getAttribute('data-index')).indice
 		if (!this.temaCompletado.includes(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice))) {
-			//console.log("hola");
 			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index')).indice].needtime) {
-
 				setTimeout(() => {
-					//console.log(info);
 					if (info.activo && info.indice == this.ultimoClick) {
-						//FUNCIONA sin esto; quitar del array los antiguos con array.splice
-						//FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
-						//TO-DO mejor responsive, 480px
-						//DONE cursor pointer, tooltips botones control
-						//DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
-						//DONE Varios tamaños de letra texto contenido
-						//TO-DO Varios tamaños letra encabezados
-						//TO-DO aria-labels
-						//WORKING Subtemas
-						//TO-DO Usar clearTimeOut
-						//TO-DO Tutorial materialize css
-						//TO-DO Funcional con subtemas recursivos
 						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
@@ -289,13 +258,22 @@ class Curso {
 	}
 
 	separaDataindex(dato) {
+		let oc = dato.split('-');
+		let index,padre = oc;
+		console.log(index);
+		console.log(padre);
 
+		let padre = 0;
 		let prof = dato.lastIndexOf(this.contSubtema);
 		let ind;
-		if (prof === -1)
+		if (prof === -1) {
 			ind = dato.substring(prof)
-		else
+			padre = -1;
+		} else {
 			ind = dato.substring(prof + 1)
+
+		}
+
 		/*let resultado = {
 			'profundidad': prof + 1,
 			'indice': ind
@@ -303,8 +281,29 @@ class Curso {
 		console.table(resultado);*/
 		return {
 			'profundidad': prof + 1,
-			'indice': ind
+			'indice': ind,
+			'padre': padre
 		}
+	}
+
+	buscarArchivo(indice, profundidad) {
+		/*let resultado;
+		for(let i = 0; i < profundidad, i++)
+		{
+
+		}*/
 	}
 }
 var cur = new Curso();
+//FUNCIONA sin esto; quitar del array los antiguos con array.splice
+//FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
+//TO-DO mejor responsive, 480px
+//DONE cursor pointer, tooltips botones control
+//DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
+//DONE Varios tamaños de letra texto contenido
+//TO-DO Varios tamaños letra encabezados
+//TO-DO aria-labels
+//WORKING Subtemas
+//TO-DO Usar clearTimeOut
+//TO-DO Tutorial materialize css
+//TO-DO Funcional con subtemas recursivos
