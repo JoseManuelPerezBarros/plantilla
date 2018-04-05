@@ -210,9 +210,9 @@ class Curso {
 			sublista.classList.add('col');
 			sublista.classList.add('s12');
 
-			let row = document.createElement("li");
-			row.classList.add("row");
-			row.classList.add("hijo");
+			let row = document.createElement('li');
+			row.classList.add('row');
+			row.classList.add('hijo');
 
 			tema.subtemas.forEach((subtema, subindex) => {
 				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`);
@@ -229,34 +229,34 @@ class Curso {
 
 	crearElementoLista(tema, index) {
 
-		let check = document.createTextNode("check_box_outline_blank");
-		let estadoTema = document.createElement("i");
-		estadoTema.classList.add("material-icons");
-		estadoTema.classList.add("green-text");
+		let check = document.createTextNode('check_box_outline_blank');
+		let estadoTema = document.createElement('i');
+		estadoTema.classList.add('material-icons');
+		estadoTema.classList.add('green-text');
 		estadoTema.appendChild(check);
 
 		let textoEnlace = document.createTextNode(tema.nombre);
-		let span = document.createElement("span");
+		let span = document.createElement('span');
 		span.appendChild(textoEnlace);
 
-		let enlace = document.createElement("a");
-		enlace.href = "#!";
+		let enlace = document.createElement('a');
+		enlace.href = '#!';
 		enlace.appendChild(estadoTema);
 		enlace.appendChild(span);
 
-		let col = document.createElement("div");
-		col.classList.add("col");
-		col.classList.add("s12");
+		let col = document.createElement('div');
+		col.classList.add('col');
+		col.classList.add('s12');
 		col.appendChild(enlace);
 
-		let row = document.createElement("div");
-		row.classList.add("row");
+		let row = document.createElement('div');
+		row.classList.add('row');
 		row.appendChild(col);
 
-		let li = document.createElement("li");
-		li.setAttribute("data-index", index);
-		li.classList.add("hoverable");
-		li.classList.add("padre");
+		let li = document.createElement('li');
+		li.setAttribute('data-index', index);
+		li.classList.add('hoverable');
+		li.classList.add('padre');
 		li.appendChild(row);
 
 		return li;
@@ -273,20 +273,20 @@ class Curso {
 			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index'))[0]].needtime) {
 				setTimeout(() => {
 					if (info.activo && info.indice == this.ultimoClick) {
-						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text");
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text");
+						if (document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.contains('orange-text')) {
+							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.remove('orange-text');
+							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.add('green-text');
 						} else {
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text");
+							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.add('green-text');
 						}
-						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
+						document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').textContent = 'check_box';
 						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
 						this.temaProgreso.splice(-1);
 					}
 				}, this.curso.tiempo, this, info);
 
 			} else {
-				document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
+				document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').textContent = 'check_box';
 				this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
 			}
 		}
