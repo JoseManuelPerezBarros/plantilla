@@ -34,15 +34,13 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
-    //console.log(this)
-    let indice = cur.separaDataindex(this.getAttribute('data-index')).indice;
-    let profundidad = cur.separaDataindex(this.getAttribute('data-index')).ancentros.length;
+    let ancestros = cur.separaDataindex(this.getAttribute('data-index'))
+    let indice = ancestros[0];
+    let profundidad = ancestros.length;
+    let tema = cur.getRutaCompleta(ancestros)
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
-
-    //console.log(this.getAttribute('data-index').match(cur.contSubtema.charAt(0))[0]);
-    console.log(cur.separaDataindex(this.getAttribute('data-index')))
     /*if (profundidad == 0) {
         pasado = cur.temas[indice].archivo;
     } else  {
@@ -61,22 +59,14 @@ function setTema(elemen) {
 
         document.getElementsByClassName('tema')[0].src = pasado;
 
-        cur.ultimoClick = parseInt(cur.separaDataindex(this.getAttribute('data-index')).indice);
+        cur.ultimoClick = parseInt(indice);
 
-        /*cur.temaProgreso.some((el, ind, arr) => {
-            if (el.indice == cur.ultimoClick) {
-                el.activo = false;
-                return true;
-            } else {
-                return false;
-            }
-        })*/
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
             'profundidad': 0,
             'activo': true
         });
-        //console.log(cur.temaProgreso)
+
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
             if (cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.contains("green-text")) {

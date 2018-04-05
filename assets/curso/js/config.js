@@ -42,7 +42,54 @@ let infocurso = {
 			'nombre': 'prueba2',
 			'codigo': null,
 			'archivo': 'a002.html',
-			'needtime': true
+			'needtime': true,
+			'subtemas': [{
+					'id': 200,
+					'padre': null,
+					'nombre': 'pruebaHijo2',
+					'codigo': null,
+					'archivo': 'a00201.html',
+					'needtime': true,
+					'subtemas': [{
+						'id': 202,
+						'padre': null,
+						'nombre': 'pruebaNieto2',
+						'codigo': null,
+						'archivo': 'a00212.html',
+						'needtime': true
+					}, {
+						'id': 203,
+						'padre': null,
+						'nombre': 'pruebaNieto23',
+						'codigo': null,
+						'archivo': 'a00223.html',
+						'needtime': true
+					}]
+				},
+				{
+					'id': 207,
+					'padre': null,
+					'nombre': 'pruebaHijo24',
+					'codigo': null,
+					'archivo': 'a002014.html',
+					'needtime': true,
+					'subtemas': [{
+						'id': 208,
+						'padre': null,
+						'nombre': 'pruebaNieto276',
+						'codigo': null,
+						'archivo': 'a002125.html',
+						'needtime': true
+					}, {
+						'id': 209,
+						'padre': null,
+						'nombre': 'pruebaNieto234',
+						'codigo': null,
+						'archivo': 'a002235.html',
+						'needtime': true
+					}]
+				}
+			]
 		},
 		{
 			'id': 2,
@@ -193,7 +240,6 @@ class Curso {
 
 	crearElementoLista(tema, index) {
 
-
 		let check = document.createTextNode("check_box_outline_blank");
 		let estadoTema = document.createElement("i");
 		estadoTema.classList.add("material-icons");
@@ -234,8 +280,8 @@ class Curso {
 
 	gestionaTiempo(elemento, info) {
 
-		if (!this.temaCompletado.includes(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice))) {
-			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index')).indice].needtime) {
+		if (!this.temaCompletado.includes(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]))) {
+			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index'))[0]].needtime) {
 				setTimeout(() => {
 					if (info.activo && info.indice == this.ultimoClick) {
 						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
@@ -245,19 +291,19 @@ class Curso {
 							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
 						}
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
-						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice));
+						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
 						this.temaProgreso.splice(-1);
 					}
 				}, this.curso.tiempo, this, info);
 
 			} else {
 				document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
-				this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index')).indice));
+				this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
 			}
 		}
 	}
 
-	separaDataindex(dato) {
+	/*separaDataindex(dato) {
 		let oc = dato.split('-');
 
 		let ancestros = [];
@@ -266,16 +312,36 @@ class Curso {
 		}
 		return {
 			'indice': oc[oc.length - 1],
-			'ancentros': ancestros
+			'ancestros': ancestros
 		};
+	}*/
+
+	separaDataindex(dato) {
+		let oc = dato.split('-');
+
+		let ancestros = [];
+		for (let i = oc.length - 1; i >= 0; i--) {
+			ancestros.push(oc[i])
+		}
+		return ancestros;
 	}
 
-	getRutaCompleta(infoRutas) {
-		/*let resultado;
-		for(let i = 0; i < profundidad, i++)
-		{
-
-		}*/
+	getRutaCompleta(ancestros, tema = this.temas, hijos = false) {
+		//console.log(ancestros.slice().reverse())
+		let sortsecna;
+		if (!hijos) {
+			sortsecna = ancestros.slice().reverse();
+		} else {
+			sortsecna = ancestros.slice(1);
+		}
+		tema = tema[sortsecna[0]];
+		
+		if (sortsecna.length > 1) {
+			
+			this.getRutaCompleta(sortsecna, tema.subtemas, true)
+		} else {
+			return tema;
+		}
 	}
 }
 var cur = new Curso();
@@ -292,3 +358,14 @@ var cur = new Curso();
 //TO-DO Tutorial materialize css
 //TO-DO Funcional con subtemas recursivos ?
 //TO-DO funcion ruta completa
+
+//Código Desechado
+
+/*cur.temaProgreso.some((el, ind, arr) => {
+	if (el.indice == cur.ultimoClick) {
+		el.activo = false;
+		return true;
+	} else {
+		return false;
+	}
+})*/
