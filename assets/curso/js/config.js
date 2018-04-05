@@ -180,7 +180,6 @@ class Curso {
 
 	get temas() {
 		return infocurso.temas
-
 	}
 
 	set actual(archivo) {
@@ -210,29 +209,18 @@ class Curso {
 			sublista.classList.add('col');
 			sublista.classList.add('s12');
 
-			/*let col = document.createElement("div");
-			col.classList.add("col");
-			col.classList.add("s12");*/
-
 			let row = document.createElement("li");
-			//let row = document.createElement("div");
 			row.classList.add("row");
 			row.classList.add("hijo");
 
 			tema.subtemas.forEach((subtema, subindex) => {
-				//let subelemento = this.crearElementoLista(subtema, this.contSubtema + '-' + subindex+'-'+padre)
 				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`)
 				subelemento.onclick = setTema;
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
-					//this.contSubtema++;
-
 					this.crearSubtemas(subtema, sublista, `${padre}-${subindex}`);
 				}
 			});
-			//this.contSubtema = 1;
-			/*col.appendChild(sublista);
-			row.appendChild(col);*/
 			row.appendChild(sublista);
 			lista.appendChild(row);
 		}
@@ -303,22 +291,8 @@ class Curso {
 		}
 	}
 
-	/*separaDataindex(dato) {
-		let oc = dato.split('-');
-
-		let ancestros = [];
-		for (let i = oc.length - 2; i >= 0; i--) {
-			ancestros.push(oc[i])
-		}
-		return {
-			'indice': oc[oc.length - 1],
-			'ancestros': ancestros
-		};
-	}*/
-
 	separaDataindex(dato) {
 		let oc = dato.split('-');
-
 		let ancestros = [];
 		for (let i = oc.length - 1; i >= 0; i--) {
 			ancestros.push(oc[i])
@@ -327,21 +301,8 @@ class Curso {
 	}
 
 	getRutaCompleta(ancestros, tema = this.temas, hijos = false) {
-		//console.log(ancestros.slice().reverse())
-		let sortsecna;
-		if (!hijos) {
-			sortsecna = ancestros.slice().reverse();
-		} else {
-			sortsecna = ancestros.slice(1);
-		}
-		tema = tema[sortsecna[0]];
-		
-		if (sortsecna.length > 1) {
-			
-			this.getRutaCompleta(sortsecna, tema.subtemas, true)
-		} else {
-			return tema;
-		}
+		let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
+		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
 	}
 }
 var cur = new Curso();

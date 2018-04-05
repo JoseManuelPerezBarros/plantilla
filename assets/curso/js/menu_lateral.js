@@ -38,6 +38,7 @@ function setTema(elemen) {
     let indice = ancestros[0];
     let profundidad = ancestros.length;
     let tema = cur.getRutaCompleta(ancestros)
+    console.log(cur.getRutaCompleta(ancestros));
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
