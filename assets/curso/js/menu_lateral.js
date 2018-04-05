@@ -7,9 +7,9 @@ document.getElementsByClassName("button-collapse")[0].addEventListener('click', 
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
     }
     if (document.querySelector('.button-collapse .material-icons').textContent == 'keyboard_arrow_left') {
-        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_right'
+        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_right';
     } else {
-        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_left'
+        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_left';
     }
 });
 
@@ -25,7 +25,7 @@ cur.temas.forEach((tema, index) => {
     cur.crearSubtemas(tema, lista, index);
 
 
-    elemento.onclick = setTema
+    elemento.onclick = setTema;
     if (index == 0) {
         elemento.click();
     }
@@ -33,16 +33,16 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
-    let ancestros = cur.separaDataindex(this.getAttribute('data-index'))
+    let ancestros = cur.separaDataindex(this.getAttribute('data-index'));
     let indice = ancestros[0];
     let profundidad = ancestros.length;
-    let tema = cur.getRutaCompleta(ancestros)
+    let tema = cur.getRutaCompleta(ancestros);
     console.log(cur.getRutaCompleta(ancestros));
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
 
-    pasado = profundidad == 0 ? tema.archivo : tema.archivo
+    pasado = profundidad == 0 ? tema.archivo : tema.archivo;
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
         if (cur.ultimoClick === null) {
@@ -65,10 +65,10 @@ function setTema(elemen) {
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
             if (cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.contains("green-text")) {
-                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.remove("green-text")
-                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.add("orange-text")
+                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.remove("green-text");
+                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").classList.add("orange-text");
             }
-            cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").textContent = "indeterminate_check_box"
+            cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector("i").textContent = "indeterminate_check_box";
         }
 
         this.classList.add("active");
@@ -98,8 +98,8 @@ function setTema(elemen) {
 document.querySelector(".anterior").addEventListener('click', () => {
 
     if (cur.ultimoClick > 0) { //Dintinto de 0 0-0 0-0-0
-        lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click()
-        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
+        lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click();
+        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click();
     }
 });
 
@@ -107,7 +107,7 @@ document.querySelector(".anterior").addEventListener('click', () => {
 document.querySelector(".siguiente").addEventListener('click', () => {
 
     if (cur.ultimoClick < cur.temas.length - 1) {
-        lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click()
+        lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click();
     }
 
 });
@@ -124,13 +124,13 @@ document.addEventListener('keyup', (e) => {
 document.querySelector(".principio").addEventListener('click', () => {
 
     if (cur.ultimoClick > 0) {
-        lista.getElementsByTagName('li').item(0).click()
+        lista.getElementsByTagName('li').item(0).click();
     }
 });
 
 document.querySelector(".final").addEventListener('click', () => {
 
     if (cur.ultimoClick < cur.temas.length) {
-        lista.getElementsByTagName('li').item(cur.temas.length - 1).click()
+        lista.getElementsByTagName('li').item(cur.temas.length - 1).click();
     }
 });

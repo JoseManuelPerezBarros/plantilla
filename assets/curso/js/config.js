@@ -165,7 +165,7 @@ class Curso {
 		this.activo = null; //Objeto con indice y profundidad
 		this.temaCompletado = [];
 		this.startTemp = {};
-		//infocurso.temas.sort((a, b) => a.id - b.id)
+		//infocurso.temas.sort((a, b) => a.id - b.id);
 		this.ordena();
 		this.temaProgreso = [];
 		this.contSubtema = 1;
@@ -180,7 +180,7 @@ class Curso {
 	}
 
 	get temas() {
-		return infocurso.temas
+		return infocurso.temas;
 	}
 
 	set actual(archivo) {
@@ -188,7 +188,7 @@ class Curso {
 	}
 
 	get temaRuta() {
-		return this.tema_archivo
+		return this.tema_archivo;
 	}
 
 	set ultimoClick(activo) {
@@ -215,7 +215,7 @@ class Curso {
 			row.classList.add("hijo");
 
 			tema.subtemas.forEach((subtema, subindex) => {
-				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`)
+				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`);
 				subelemento.onclick = setTema;
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
@@ -274,10 +274,10 @@ class Curso {
 				setTimeout(() => {
 					if (info.activo && info.indice == this.ultimoClick) {
 						if (document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.contains("orange-text")) {
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text")
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.remove("orange-text");
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text");
 						} else {
-							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text")
+							document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").classList.add("green-text");
 						}
 						document.querySelector("#slide-out").children.item(this.ultimoClick).querySelector("i").textContent = "check_box";
 						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
@@ -296,7 +296,7 @@ class Curso {
 		let oc = dato.split('-');
 		let ancestros = [];
 		for (let i = oc.length - 1; i >= 0; i--) {
-			ancestros.push(oc[i])
+			ancestros.push(oc[i]);
 		}
 		return ancestros;
 	}
@@ -306,14 +306,13 @@ class Curso {
 		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
 	}
 	ordena(temas = infocurso.temas) {
-
 		temas.forEach((tema) => {
 			if (tema.subtemas) {
 				this.ordena(tema.subtemas);
-				tema.subtemas.sort((a, b) => a.id - b.id)
+				tema.subtemas.sort((a, b) => a.id - b.id);
 			}
-		})
-		temas.sort((a, b) => a.id - b.id)
+		});
+		temas.sort((a, b) => a.id - b.id);
 	}
 }
 var cur = new Curso();
@@ -342,3 +341,6 @@ var cur = new Curso();
 		return false;
 	}
 })*/
+
+//Expresion regular lineas sin ;
+// ^.+[^{},;]$
