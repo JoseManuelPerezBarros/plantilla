@@ -18,7 +18,6 @@ let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
 
-
     //let elemento = cur.crearElementoLista(tema, '0-' + index);
     let elemento = cur.crearElementoLista(tema, index);
 
@@ -42,17 +41,12 @@ function setTema(elemen) {
 
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
-    /*if (profundidad == 0) {
-        pasado = cur.temas[indice].archivo;
-    } else  {
-        pasado = cur.temas[indice].archivo;
-    }*/
-    //pasado = cur.buscaArchivo(indice,profundidad);
-    pasado = profundidad == 0 ? cur.temas[indice].archivo : cur.temas[indice].archivo
+
+    pasado = profundidad == 0 ? tema.archivo : tema.archivo
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
         if (cur.ultimoClick === null) {
-            //cur.temaProgreso.splice(0, 1);
+
             this.classList.add("active");
         } else {
             document.querySelector('.active').classList.toggle("active");
@@ -103,7 +97,7 @@ function setTema(elemen) {
 
 document.querySelector(".anterior").addEventListener('click', () => {
 
-    if (cur.ultimoClick > 0) {
+    if (cur.ultimoClick > 0) { //Dintinto de 0 0-0 0-0-0
         lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click()
         //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click()
     }

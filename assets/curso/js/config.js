@@ -74,7 +74,7 @@ let infocurso = {
 					'archivo': 'a002014.html',
 					'needtime': true,
 					'subtemas': [{
-						'id': 208,
+						'id': 218,
 						'padre': null,
 						'nombre': 'pruebaNieto276',
 						'codigo': null,
@@ -165,7 +165,8 @@ class Curso {
 		this.activo = null; //Objeto con indice y profundidad
 		this.temaCompletado = [];
 		this.startTemp = {};
-		infocurso.temas.sort((a, b) => a.id - b.id)
+		//infocurso.temas.sort((a, b) => a.id - b.id)
+		this.ordena();
 		this.temaProgreso = [];
 		this.contSubtema = 1;
 	}
@@ -304,8 +305,19 @@ class Curso {
 		let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
 		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
 	}
+	ordena(temas = infocurso.temas) {
+
+		temas.forEach((tema) => {
+			if (tema.subtemas) {
+				this.ordena(tema.subtemas);
+				tema.subtemas.sort((a, b) => a.id - b.id)
+			}
+		})
+		temas.sort((a, b) => a.id - b.id)
+	}
 }
 var cur = new Curso();
+
 //FUNCIONA sin esto; quitar del array los antiguos con array.splice
 //FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
 //TO-DO mejor responsive, 480px
