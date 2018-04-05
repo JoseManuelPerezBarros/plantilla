@@ -169,6 +169,7 @@ class Curso {
 		this.ordena();
 		this.temaProgreso = [];
 		this.contSubtema = 1;
+		this.numTemas = this.contarTemas();
 	}
 
 	get curso() {
@@ -314,8 +315,18 @@ class Curso {
 		});
 		temas.sort((a, b) => a.id - b.id);
 	}
+
+	contarTemas(temas = this.temas) {
+		let cont = temas.length;
+		for (let i = 0; i < temas.length; i++) {
+			if (temas[i].subtemas)
+				cont += this.contarTemas(temas[i].subtemas)
+		}
+		return cont;
+	}
 }
 var cur = new Curso();
+console.log(cur.numTemas);
 
 //FUNCIONA sin esto; quitar del array los antiguos con array.splice
 //FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui

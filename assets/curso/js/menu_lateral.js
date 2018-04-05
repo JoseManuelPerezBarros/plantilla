@@ -29,7 +29,6 @@ cur.temas.forEach((tema, index) => {
     if (index == 0) {
         elemento.click();
     }
-
 });
 
 function setTema(elemen) {
@@ -61,7 +60,9 @@ function setTema(elemen) {
             'profundidad': 0,
             'activo': true
         });
-
+        /* ultimoClick va a ser un string 0-1-0 
+        hacer comprobaciones por querySelector('[data-index]')
+        */
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
             if (cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').classList.contains('green-text')) {
@@ -109,7 +110,6 @@ document.querySelector('.siguiente').addEventListener('click', () => {
     if (cur.ultimoClick < cur.temas.length - 1) {
         lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click();
     }
-
 });
 
 document.addEventListener('keyup', (e) => {
