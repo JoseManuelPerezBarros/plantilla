@@ -13,7 +13,6 @@ document.getElementsByClassName('button-collapse')[0].addEventListener('click', 
     }
 });
 
-
 let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
@@ -23,7 +22,6 @@ cur.temas.forEach((tema, index) => {
 
     lista.appendChild(elemento);
     cur.crearSubtemas(tema, lista, index);
-
 
     elemento.onclick = setTema;
     if (index == 0) {
@@ -36,33 +34,28 @@ function setTema(elemen) {
     let indice = ancestros[0];
     let profundidad = ancestros.length;
     let tema = cur.getRutaCompleta(ancestros);
-    console.log(cur.getRutaCompleta(ancestros));
-
+    //console.log(cur.getRutaCompleta(ancestros));
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
 
-    pasado = profundidad == 0 ? tema.archivo : tema.archivo;
+    pasado = profundidad == 0 ?
+        tema.archivo :
+        tema.archivo;
+
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
-        if (cur.ultimoClick === null) {
-
-            this.classList.add('active');
-        } else {
+        cur.ultimoClick === null ?
+            this.classList.add('active') :
             document.querySelector('.active').classList.toggle('active');
-        }
 
         document.getElementsByClassName('tema')[0].src = pasado;
-
         cur.ultimoClick = parseInt(indice);
-
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
             'profundidad': 0,
             'activo': true
         });
-        /* ultimoClick va a ser un string 0-1-0 
-        hacer comprobaciones por querySelector('[data-index]')
-        */
+
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
             if (cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').classList.contains('green-text')) {
@@ -73,9 +66,7 @@ function setTema(elemen) {
         }
 
         this.classList.add('active');
-
         cur.actualizanumpag(parseInt(cur.ultimoClick) + 1);
-
         cur.gestionaTiempo(this, cur.temaProgreso[cur.temaProgreso.length - 1]);
 
         if (cur.ultimoClick == 0) {
@@ -103,7 +94,6 @@ document.querySelector('.anterior').addEventListener('click', () => {
         //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click();
     }
 });
-
 
 document.querySelector('.siguiente').addEventListener('click', () => {
 

@@ -170,6 +170,7 @@ class Curso {
 		this.temaProgreso = [];
 		this.contSubtema = 1;
 		this.numTemas = this.contarTemas();
+		this.indexTemas = 0;
 	}
 
 	get curso() {
@@ -253,9 +254,12 @@ class Curso {
 		let row = document.createElement('div');
 		row.classList.add('row');
 		row.appendChild(col);
+		//data-index para indices html
+		//data-ruta para formato 0-0-0
 
 		let li = document.createElement('li');
 		li.setAttribute('data-index', index);
+		li.setAttribute('data-num', this.indexTemas++);
 		li.classList.add('hoverable');
 		li.classList.add('padre');
 		li.appendChild(row);
@@ -306,6 +310,7 @@ class Curso {
 		let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
 		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
 	}
+
 	ordena(temas = infocurso.temas) {
 		temas.forEach((tema) => {
 			if (tema.subtemas) {
@@ -318,15 +323,14 @@ class Curso {
 
 	contarTemas(temas = this.temas) {
 		let cont = temas.length;
-		for (let i = 0; i < temas.length; i++) {
+		for (let i = 0; i < temas.length; i++)
 			if (temas[i].subtemas)
 				cont += this.contarTemas(temas[i].subtemas)
-		}
 		return cont;
 	}
 }
+
 var cur = new Curso();
-console.log(cur.numTemas);
 
 //FUNCIONA sin esto; quitar del array los antiguos con array.splice
 //FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
@@ -341,6 +345,7 @@ console.log(cur.numTemas);
 //TO-DO Tutorial materialize css
 //TO-DO Funcional con subtemas recursivos ?
 //TO-DO funcion ruta completa
+//TO-DO actualizarnumpagina data-indexTotal y data-ruta
 
 //Código Desechado
 
