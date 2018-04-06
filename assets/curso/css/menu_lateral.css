@@ -16,6 +16,10 @@ footer {
 .btn-large:hover {
   background-color: #00bcd4;
 }
+#slide-out
+{
+  max-height: 100%;
+}
 
 #slide-out.side-nav i,
 #slide-out.side-nav span {
