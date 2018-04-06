@@ -343,12 +343,12 @@ var cur = new Curso();
 //DONE Varios tamaños de letra texto contenido
 //TO-DO Varios tamaños letra encabezados
 //TO-DO aria-labels
-//WORKING Subtemas
+//DONE Subtemas
 //TO-DO Usar clearTimeOut
 //TO-DO Tutorial materialize css
-//TO-DO Funcional con subtemas recursivos ?
-//TO-DO funcion ruta completa
-//TO-DO actualizarnumpagina data-indexTotal y data-ruta
+//DONE Funcional con subtemas recursivos ?
+//DONE funcion ruta completa
+//DONE actualizarnumpagina data-indexTotal y data-ruta
 
 //Código Desechado
 
