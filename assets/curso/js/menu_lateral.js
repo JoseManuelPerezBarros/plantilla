@@ -17,7 +17,6 @@ let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
 
-    //let elemento = cur.crearElementoLista(tema, '0-' + index);
     let elemento = cur.crearElementoLista(tema, index);
 
     lista.appendChild(elemento);
@@ -30,11 +29,9 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
-    let ancestros = cur.separaDataindex(this.getAttribute('data-index'));
-    let indice = ancestros[0];
-    let profundidad = ancestros.length;
-    let tema = cur.getRutaCompleta(ancestros);
-    //console.log(cur.getRutaCompleta(ancestros));
+    let profundidad = (this.getAttribute('data-ruta').length + 1) / 2
+    let indice = this.getAttribute('data-index');
+    let tema = cur.traducir(this.getAttribute('data-ruta'));
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
 
@@ -52,17 +49,17 @@ function setTema(elemen) {
         cur.ultimoClick = parseInt(indice);
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
-            'profundidad': 0,
+            'ruta': this.getAttribute('data-ruta'),
             'activo': true
         });
 
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;
-            if (cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').classList.contains('green-text')) {
-                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').classList.remove('green-text');
-                cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').classList.add('orange-text');
+            if (cur.lista.querySelector(`li[data-index="${cur.temaProgreso[cur.temaProgreso.length - 2].indice}"]`).querySelector('i').classList.contains('green-text')) {
+                cur.lista.querySelector(`li[data-index="${cur.temaProgreso[cur.temaProgreso.length - 2].indice}"]`).querySelector('i').classList.remove('green-text');
+                cur.lista.querySelector(`li[data-index="${cur.temaProgreso[cur.temaProgreso.length - 2].indice}"]`).querySelector('i').classList.add('orange-text');
             }
-            cur.lista.children.item(cur.temaProgreso[cur.temaProgreso.length - 2].indice).querySelector('i').textContent = 'indeterminate_check_box';
+            cur.lista.querySelector(`li[data-index="${cur.temaProgreso[cur.temaProgreso.length - 2].indice}"]`).querySelector('i').textContent = 'indeterminate_check_box';
         }
 
         this.classList.add('active');
@@ -77,7 +74,7 @@ function setTema(elemen) {
             document.querySelector('.principio').classList.remove('disabled');
         }
 
-        if (cur.ultimoClick == cur.temas.length - 1) {
+        if (cur.ultimoClick == cur.numTemas - 1) {
             document.querySelector('.siguiente').classList.add('disabled');
             document.querySelector('.final').classList.add('disabled');
         } else {
@@ -89,16 +86,15 @@ function setTema(elemen) {
 
 document.querySelector('.anterior').addEventListener('click', () => {
 
-    if (cur.ultimoClick > 0) { //Dintinto de 0 0-0 0-0-0
-        lista.getElementsByTagName('li').item(cur.ultimoClick - 1).click();
-        //lista.getElementsByTagName('li').item(cur.ultimoClick).previousElementSibling.click();
+    if (cur.ultimoClick > 0) {
+        lista.querySelector(`li[data-index="${cur.ultimoClick-1}"]`).click();
     }
 });
 
 document.querySelector('.siguiente').addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.temas.length - 1) {
-        lista.getElementsByTagName('li').item(parseInt(cur.ultimoClick) + 1).click();
+    if (cur.ultimoClick < cur.numTemas - 1) {
+        lista.querySelector(`li[data-index="${cur.ultimoClick+1}"]`).click();
     }
 });
 
@@ -120,7 +116,7 @@ document.querySelector('.principio').addEventListener('click', () => {
 
 document.querySelector('.final').addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.temas.length) {
-        lista.getElementsByTagName('li').item(cur.temas.length - 1).click();
+    if (cur.ultimoClick < cur.numTemas) {
+        lista.querySelector(`li[data-index="${cur.numTemas -1}"]`).click();
     }
 });

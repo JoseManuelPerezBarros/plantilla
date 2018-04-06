@@ -162,7 +162,7 @@ class Curso {
 	constructor() {
 		this.tema_nombre = null;
 		this.tema_archivo = null;
-		this.activo = null; //Objeto con indice y profundidad
+		this.activo = null;
 		this.temaCompletado = [];
 		this.startTemp = {};
 		//infocurso.temas.sort((a, b) => a.id - b.id);
@@ -254,12 +254,10 @@ class Curso {
 		let row = document.createElement('div');
 		row.classList.add('row');
 		row.appendChild(col);
-		//data-index para indices html
-		//data-ruta para formato 0-0-0
 
 		let li = document.createElement('li');
-		li.setAttribute('data-index', index);
-		li.setAttribute('data-num', this.indexTemas++);
+		li.setAttribute('data-ruta', index);
+		li.setAttribute('data-index', this.indexTemas++);
 		li.classList.add('hoverable');
 		li.classList.add('padre');
 		li.appendChild(row);
@@ -269,30 +267,29 @@ class Curso {
 
 	actualizanumpag(pagina) {
 		let pag = document.querySelector('.numpag p');
-		pag.textContent = `${pagina}/${this.temas.length}`;
+		pag.textContent = `${pagina}/${this.numTemas}`;
 	}
 
 	gestionaTiempo(elemento, info) {
-
-		if (!this.temaCompletado.includes(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]))) {
-			if (this.temas[this.separaDataindex(elemento.getAttribute('data-index'))[0]].needtime) {
+		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
+			if (this.traducir(elemento.getAttribute('data-ruta')).needtime) {
 				setTimeout(() => {
 					if (info.activo && info.indice == this.ultimoClick) {
-						if (document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.contains('orange-text')) {
-							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.remove('orange-text');
-							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.add('green-text');
+						if (document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.contains('orange-text')) {
+							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.remove('orange-text');
+							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.add('green-text');
 						} else {
-							document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').classList.add('green-text');
+							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.add('green-text');
 						}
-						document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').textContent = 'check_box';
-						this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
+						document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').textContent = 'check_box';
+						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 						this.temaProgreso.splice(-1);
 					}
 				}, this.curso.tiempo, this, info);
 
 			} else {
-				document.querySelector('#slide-out').children.item(this.ultimoClick).querySelector('i').textContent = 'check_box';
-				this.temaCompletado.push(parseInt(this.separaDataindex(elemento.getAttribute('data-index'))[0]));
+				document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').textContent = 'check_box';
+				this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
 			}
 		}
 	}
@@ -304,6 +301,12 @@ class Curso {
 			ancestros.push(oc[i]);
 		}
 		return ancestros;
+	}
+
+	traducir(ruta, index = false) {
+		return this.getRutaCompleta(!index ?
+			this.separaDataindex(ruta) :
+			this.separaDataindex(this.lista.querySelector(`li[data-index="${ruta}"]`).getAttribute('data-ruta')));
 	}
 
 	getRutaCompleta(ancestros, tema = this.temas, hijos = false) {
