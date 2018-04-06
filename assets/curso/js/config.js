@@ -295,12 +295,13 @@ class Curso {
 	}
 
 	separaDataindex(dato) {
-		let oc = dato.split('-');
-		let ancestros = [];
-		for (let i = oc.length - 1; i >= 0; i--) {
-			ancestros.push(oc[i]);
-		}
-		return ancestros;
+		// let oc = dato.split('-');
+		// let ancestros = [];
+		// for (let i = oc.length - 1; i >= 0; i--) {
+		// 	ancestros.push(oc[i]);
+		// }
+		// return ancestros;
+		return dato.split('-');
 	}
 
 	traducir(ruta, index = false) {
@@ -310,8 +311,10 @@ class Curso {
 	}
 
 	getRutaCompleta(ancestros, tema = this.temas, hijos = false) {
-		let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
-		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
+		// let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
+		// return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
+		if (hijos) ancestros.shift();
+		return ancestros.length > 1 ? this.getRutaCompleta(ancestros, tema[ancestros[ancestros.length - 1]].subtemas, true) : tema[ancestros[ancestros.length - 1]];
 	}
 
 	ordena(temas = infocurso.temas) {
