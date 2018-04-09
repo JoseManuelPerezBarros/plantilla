@@ -34,6 +34,7 @@ function setTema(elemen) {
     let tema = cur.traducir(this.getAttribute('data-ruta'));
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
+    console.log(tema);
 
     pasado = profundidad == 0 ?
         tema.archivo :
