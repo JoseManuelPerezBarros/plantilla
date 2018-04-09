@@ -29,12 +29,12 @@ cur.temas.forEach((tema, index) => {
 });
 
 function setTema(elemen) {
-    let profundidad = (this.getAttribute('data-ruta').length + 1) / 2
+    let ruta = this.getAttribute('data-ruta');
+    let profundidad = (ruta.length + 1) / 2;
     let indice = this.getAttribute('data-index');
-    let tema = cur.getRutaCompleta(this.getAttribute('data-ruta'));
+    let tema = cur.getRutaCompleta(ruta);
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
-    console.log(tema);
 
     pasado = profundidad == 0 ?
         tema.archivo :
@@ -50,7 +50,7 @@ function setTema(elemen) {
         cur.ultimoClick = parseInt(indice);
         cur.temaProgreso.push({
             'indice': cur.ultimoClick,
-            'ruta': this.getAttribute('data-ruta'),
+            'ruta': ruta,
             'activo': true
         });
 

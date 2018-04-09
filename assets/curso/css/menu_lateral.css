@@ -1,8 +1,6 @@
-
-:root{
-  --main-color : #00bcd4;
+:root {
+  --main-color: #00bcd4;
 }
-
 header,
 main,
 footer {
@@ -54,7 +52,7 @@ footer {
 #slide-out.sidenav .row {
   margin-bottom: 0;
 }
-.hijo
-{
+
+.hijo {
   padding-left: 10px;
 }

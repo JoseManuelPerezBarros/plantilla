@@ -270,24 +270,27 @@ class Curso {
 
 	gestionaTiempo(elemento, info) {
 		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
-			if (this.getRutaCompleta(elemento.getAttribute('data-ruta')).needtime) {
+			if (this.getRutaCompleta(info.ruta).needtime) {
 				setTimeout(() => {
+					let checkbox = document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i');
 					if (info.activo && info.indice == this.ultimoClick) {
-						if (document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.contains('orange-text')) {
-							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.remove('orange-text');
-							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.add('green-text');
+						if (checkbox.classList.contains('orange-text')) {
+							checkbox.classList.remove('orange-text');
+							checkbox.classList.add('green-text');
 						} else {
-							document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.add('green-text');
+							checkbox.classList.add('green-text');
 						}
-						document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').textContent = 'check_box';
+						checkbox.textContent = 'check_box';
 						this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
-						this.temaProgreso.splice(-1);
+						this.temaProgreso = [];
+						//Aquí va AJAX
 					}
 				}, this.curso.tiempo, this, info);
 
 			} else {
 				document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').textContent = 'check_box';
 				this.temaCompletado.push(parseInt(elemento.getAttribute('data-index')));
+				this.temaProgreso = [];
 			}
 		}
 	}
@@ -299,11 +302,13 @@ class Curso {
 
 	ordenayCuenta(temas = this.temas, ordenar = true) {
 		let cont = temas.length;
-		for (let i = 0; i < temas.length; i++)
+		for (let i = 0; i < temas.length; i++) {
 			if (temas[i].subtemas) {
 				if (ordenar) temas[i].subtemas.sort((a, b) => a.id - b.id);
-				cont += this.ordenayCuenta(temas[i].subtemas, ordenar)
+				cont += this.ordenayCuenta(temas[i].subtemas, ordenar);
 			}
+		}
+
 		if (ordenar) temas.sort((a, b) => a.id - b.id);
 		return cont;
 	}
@@ -339,3 +344,4 @@ var cur = new Curso();
 
 //Expresion regular lineas sin ;
 // ^.+[^{},;]$
+//^.+[^\?:{},;]$
