@@ -165,11 +165,9 @@ class Curso {
 		this.activo = null;
 		this.temaCompletado = [];
 		this.startTemp = {};
-		//infocurso.temas.sort((a, b) => a.id - b.id);
-		this.ordena();
 		this.temaProgreso = [];
 		this.contSubtema = 1;
-		this.numTemas = this.contarTemas();
+		this.numTemas = this.ordenayCuenta(this.temas, true);
 		this.indexTemas = 0;
 	}
 
@@ -299,21 +297,14 @@ class Curso {
 		return ancestros.length > 1 ? this.getRutaCompleta(ancestros, tema[ancestros[0]].subtemas, true) : tema[ancestros[0]];
 	}
 
-	ordena(temas = infocurso.temas) {
-		temas.forEach((tema) => {
-			if (tema.subtemas) {
-				this.ordena(tema.subtemas);
-				tema.subtemas.sort((a, b) => a.id - b.id);
-			}
-		});
-		temas.sort((a, b) => a.id - b.id);
-	}
-
-	contarTemas(temas = this.temas) {
+	ordenayCuenta(temas = this.temas, ordenar = true) {
 		let cont = temas.length;
 		for (let i = 0; i < temas.length; i++)
-			if (temas[i].subtemas)
-				cont += this.contarTemas(temas[i].subtemas)
+			if (temas[i].subtemas) {
+				if (ordenar) temas[i].subtemas.sort((a, b) => a.id - b.id);
+				cont += this.ordenayCuenta(temas[i].subtemas, ordenar)
+			}
+		if (ordenar) temas.sort((a, b) => a.id - b.id);
 		return cont;
 	}
 }
