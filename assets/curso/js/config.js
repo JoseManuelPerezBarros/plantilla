@@ -272,7 +272,7 @@ class Curso {
 
 	gestionaTiempo(elemento, info) {
 		if (!this.temaCompletado.includes(parseInt(elemento.getAttribute('data-index')))) {
-			if (this.traducir(elemento.getAttribute('data-ruta')).needtime) {
+			if (this.getRutaCompleta(elemento.getAttribute('data-ruta')).needtime) {
 				setTimeout(() => {
 					if (info.activo && info.indice == this.ultimoClick) {
 						if (document.querySelector('#slide-out').querySelector(`li[data-index="${this.ultimoClick}"]`).querySelector('i').classList.contains('orange-text')) {
@@ -294,30 +294,9 @@ class Curso {
 		}
 	}
 
-	separaDataindex(dato) {
-		//return dato.split('-');
-		let oc = dato.split('-');
-		let ancestros = [];
-		for (let i = oc.length - 1; i >= 0; i--) {
-			ancestros.push(oc[i]);
-		}
-		return ancestros;
-	}
-
-	traducir(ruta, index = false) {
-		return this.getRutaCompleta(!index ?
-			this.separaDataindex(ruta) :
-			this.separaDataindex(this.lista.querySelector(`li[data-index="${ruta}"]`).getAttribute('data-ruta')));
-	}
-
 	getRutaCompleta(ancestros, tema = this.temas, hijos = false) {
-		//dato.split('-');
-		//!hijos ? ancestros = ancestros.split('-') : ancestros.shift();
-		/*if (hijos) ancestros.shift();
-		return ancestros.length > 1 ? this.getRutaCompleta(ancestros, tema[ancestros[ancestros.length - 1]].subtemas, true) : tema[ancestros[ancestros.length - 1]];*/
-
-		let sortsecna = !hijos ? ancestros.slice().reverse() : ancestros.slice(1);
-		return sortsecna.length > 1 ? this.getRutaCompleta(sortsecna, tema[sortsecna[0]].subtemas, true) : tema[sortsecna[0]];
+		!hijos ? ancestros = ancestros.split('-') : ancestros.shift();
+		return ancestros.length > 1 ? this.getRutaCompleta(ancestros, tema[ancestros[0]].subtemas, true) : tema[ancestros[0]];
 	}
 
 	ordena(temas = infocurso.temas) {

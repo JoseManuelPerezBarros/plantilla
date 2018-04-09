@@ -31,7 +31,7 @@ cur.temas.forEach((tema, index) => {
 function setTema(elemen) {
     let profundidad = (this.getAttribute('data-ruta').length + 1) / 2
     let indice = this.getAttribute('data-index');
-    let tema = cur.traducir(this.getAttribute('data-ruta'));
+    let tema = cur.getRutaCompleta(this.getAttribute('data-ruta'));
     let presente = document.getElementsByClassName('tema')[0].src;
     let pasado;
     console.log(tema);
