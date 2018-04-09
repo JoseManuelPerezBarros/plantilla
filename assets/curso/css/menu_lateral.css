@@ -1,3 +1,8 @@
+
+:root{
+  --main-color : #00bcd4;
+}
+
 header,
 main,
 footer {
@@ -14,38 +19,42 @@ footer {
 
 .btn:hover,
 .btn-large:hover {
-  background-color: #00bcd4;
+  background-color: var(--main-color);
 }
 
 #slide-out {
   max-height: 100%;
 }
 
-#slide-out.side-nav i,
-#slide-out.side-nav span {
+#slide-out.sidenav i,
+#slide-out.sidenav span {
   vertical-align: middle;
 }
 
-#slide-out.side-nav a {
+#slide-out.sidenav a {
   color: rgba(0, 0, 0, 0.87);
   /*color: #6487e7;*/
   padding-left: 5px;
 }
 
-#slide-out.side-nav a span {
+#slide-out.sidenav a span {
   padding-left: 10px;
 }
 
-#slide-out.side-nav li {
+#slide-out.sidenav li {
   line-height: 30px;
   padding-top: 3px;
   padding-bottom: 3px;
 }
 
-#slide-out.side-nav li:hover {
+#slide-out.sidenav li:hover {
   cursor: pointer;
 }
 
-#slide-out.side-nav .row {
+#slide-out.sidenav .row {
   margin-bottom: 0;
+}
+.hijo
+{
+  padding-left: 10px;
 }

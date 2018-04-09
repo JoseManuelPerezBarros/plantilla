@@ -1,15 +1,15 @@
-document.getElementsByClassName('button-collapse')[0].addEventListener('click', () => {
-    document.getElementsByClassName('side-nav')[0].classList.toggle('hide');
-    document.getElementsByClassName('button-collapse')[0].classList.toggle('pulse');
+document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', () => {
+    document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
+    document.getElementsByClassName('sidenav-trigger')[0].classList.toggle('pulse');
     if (document.getElementsByTagName('main')[0].style.paddingLeft == '300px' || document.getElementsByTagName('main')[0].style.paddingLeft == '') {
         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
     } else {
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
     }
-    if (document.querySelector('.button-collapse .material-icons').textContent == 'keyboard_arrow_left') {
-        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_right';
+    if (document.querySelector('.sidenav-trigger .material-icons').textContent == 'keyboard_arrow_left') {
+        document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_right';
     } else {
-        document.querySelector('.button-collapse .material-icons').textContent = 'keyboard_arrow_left';
+        document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_left';
     }
 });
 
