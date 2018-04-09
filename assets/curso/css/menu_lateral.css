@@ -23,6 +23,11 @@ footer {
 #slide-out {
   max-height: 100%;
 }
+.sidenav
+{
+  padding-bottom: 0;
+  margin-bottom: 60px;
+}
 
 #slide-out.sidenav i,
 #slide-out.sidenav span {

@@ -30,15 +30,10 @@ cur.temas.forEach((tema, index) => {
 
 function setTema(elemen) {
     let ruta = this.getAttribute('data-ruta');
-    let profundidad = (ruta.length + 1) / 2;
     let indice = this.getAttribute('data-index');
     let tema = cur.getRutaCompleta(ruta);
     let presente = document.getElementsByClassName('tema')[0].src;
-    let pasado;
-
-    pasado = profundidad == 0 ?
-        tema.archivo :
-        tema.archivo;
+    let pasado = tema.archivo;
 
     if (presente.match(/[a-zA-Z]?\d{2,}\.html/ig)[0] != pasado) {
 
@@ -100,7 +95,7 @@ document.querySelector('.siguiente').addEventListener('click', () => {
 });
 
 document.addEventListener('keyup', (e) => {
-
+    
     if (e.keyCode == 39 || e.which == 39) {
         document.querySelector('.siguiente').click();
     } else if (e.keyCode == 37 || e.which == 37) {

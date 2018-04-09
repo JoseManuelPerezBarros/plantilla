@@ -164,13 +164,26 @@ class Curso {
 		this.tema_archivo = null;
 		this.activo = null;
 		this.temaCompletado = [];
-		this.startTemp = {};
 		this.temaProgreso = [];
-		this.contSubtema = 1;
 		this.numTemas = this.ordenayCuenta(this.temas, true);
 		this.indexTemas = 0;
+		M.AutoInit();
 	}
 
+	materialice() {
+		let elem = document.querySelectorAll('.tooltipped');
+		let instance = M.Tooltip.init(elem);
+		let options = {
+			enterDelay: 200
+		}
+
+		elem.forEach(element => {
+			instance = M.Tooltip.init(element, options);
+		}, options);
+
+		let elem2 = document.querySelector('.sidenav');
+		let instance2 = M.Sidenav.init(elem2);
+	}
 	get curso() {
 		return infocurso;
 	}
