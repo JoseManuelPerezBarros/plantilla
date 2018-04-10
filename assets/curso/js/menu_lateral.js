@@ -1,4 +1,6 @@
 document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', () => {
+    console.log(window.innerWidth)
+    console.log(window.screen.width)
     document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
     document.getElementsByClassName('sidenav-trigger')[0].classList.toggle('pulse');
     if (document.getElementsByTagName('main')[0].style.paddingLeft == '300px' || document.getElementsByTagName('main')[0].style.paddingLeft == '') {
@@ -42,7 +44,9 @@ cur.temas.forEach((tema, index) => {
     if (index == 0) {
         elemento.click();
     }
+    elemento.addEventListener('click',setTema);
 });
+
 
 function setTema(elemen) {
     let ruta = this.getAttribute('data-ruta');
