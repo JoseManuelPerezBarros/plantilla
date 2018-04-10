@@ -13,6 +13,22 @@ document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', 
     }
 });
 
+// document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
+//     console.log(document.getElementById('slide-out').style.transform.match(/\d+/i));
+//     let posMenu = document.getElementById('slide-out').style.transform.match(/\d+/i);
+//     console.log(e)
+//     e.stopImmediatePropagation();
+//     //document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
+//     if (!posMenu || posMenu[0] == 0) {
+//         console.log("hola mundo");
+//         document.getElementById('slide-out').style.transform='translateX(-105%)';
+//         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
+//     } else {
+//         document.getElementById('slide-out').style.transform='translateX(0)';
+//         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+//     }
+// });
+
 let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
@@ -59,6 +75,7 @@ function setTema(elemen) {
         }
 
         this.classList.add('active');
+        document.querySelector('.card-title').textContent = tema.nombre;
         cur.actualizanumpag(parseInt(cur.ultimoClick) + 1);
         cur.gestionaTiempo(this, cur.temaProgreso[cur.temaProgreso.length - 1]);
 
@@ -95,7 +112,7 @@ document.querySelector('.siguiente').addEventListener('click', () => {
 });
 
 document.addEventListener('keyup', (e) => {
-    
+
     if (e.keyCode == 39 || e.which == 39) {
         document.querySelector('.siguiente').click();
     } else if (e.keyCode == 37 || e.which == 37) {

@@ -170,20 +170,6 @@ class Curso {
 		M.AutoInit();
 	}
 
-	materialice() {
-		let elem = document.querySelectorAll('.tooltipped');
-		let instance = M.Tooltip.init(elem);
-		let options = {
-			enterDelay: 200
-		}
-
-		elem.forEach(element => {
-			instance = M.Tooltip.init(element, options);
-		}, options);
-
-		let elem2 = document.querySelector('.sidenav');
-		let instance2 = M.Sidenav.init(elem2);
-	}
 	get curso() {
 		return infocurso;
 	}
@@ -358,3 +344,18 @@ var cur = new Curso();
 //Expresion regular lineas sin ;
 // ^.+[^{},;]$
 //^.+[^\?:{},;]$
+
+// materialice() {
+	// 	let elem = document.querySelectorAll('.tooltipped');
+	// 	let instance = M.Tooltip.init(elem);
+	// 	let options = {
+	// 		enterDelay: 200
+	// 	}
+
+	// 	elem.forEach(element => {
+	// 		instance = M.Tooltip.init(element, options);
+	// 	}, options);
+
+	// 	let elem2 = document.querySelector('.sidenav');
+	// 	let instance2 = M.Sidenav.init(elem2);
+	// }
