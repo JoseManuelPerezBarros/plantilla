@@ -161,7 +161,6 @@ let infocurso = {
 class Curso {
 	constructor() {
 		this.tema_nombre = null;
-		this.tema_archivo = null;
 		this.activo = null;
 		this.temaCompletado = [];
 		this.temaProgreso = [];
@@ -180,14 +179,6 @@ class Curso {
 
 	get temas() {
 		return infocurso.temas;
-	}
-
-	set actual(archivo) {
-		this.tema_archivo = archivo;
-	}
-
-	get temaRuta() {
-		return this.tema_archivo;
 	}
 
 	set ultimoClick(activo) {
@@ -215,7 +206,8 @@ class Curso {
 
 			tema.subtemas.forEach((subtema, subindex) => {
 				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`);
-				subelemento.onclick = setTema;
+				//subelemento.onclick = setTema;
+				subelemento.addEventListener('click', setTema);
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
 					this.crearSubtemas(subtema, sublista, `${padre}-${subindex}`);
@@ -261,7 +253,6 @@ class Curso {
 
 		return li;
 	}
-
 	actualizanumpag(pagina) {
 		let pag = document.querySelector('.numpag p');
 		pag.textContent = `${pagina}/${this.numTemas}`;
@@ -329,6 +320,7 @@ var cur = new Curso();
 //DONE Funcional con subtemas recursivos ?
 //DONE funcion ruta completa
 //DONE actualizarnumpagina data-indexTotal y data-ruta
+//SCORM
 
 //Código Desechado
 
