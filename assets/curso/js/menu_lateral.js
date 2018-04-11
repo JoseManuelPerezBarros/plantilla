@@ -14,14 +14,19 @@
 //         document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_left';
 //     }
 // });
-
+window.addEventListener('resize', () => {console.log(innerWidth)});
 document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
     console.log(document.getElementById('slide-out').style.transform.match(/\d+/i));
     let posMenu = document.getElementById('slide-out').style.transform.match(/\d+/i);
-    //     console.log(window.innerWidth)
-    //     console.log(window.screen.width)
-    e.stopImmediatePropagation();
+    console.log(typeof innerWidth) //Tamaño ventana
+    console.log(window.screen.width) //Tamaño pantalla
+    //e.stopImmediatePropagation();
     //document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
+    if (innerWidth <= 992) {
+
+    } else {
+
+    }
     if (!posMenu || posMenu[0] == 0) {
         console.log("hola mundo");
         document.getElementById('slide-out').style.transform = 'translateX(-105%)';

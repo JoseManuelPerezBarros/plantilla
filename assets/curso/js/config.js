@@ -338,16 +338,19 @@ var cur = new Curso();
 //^.+[^\?:{},;]$
 
 // materialice() {
-	// 	let elem = document.querySelectorAll('.tooltipped');
-	// 	let instance = M.Tooltip.init(elem);
-	// 	let options = {
-	// 		enterDelay: 200
-	// 	}
+// 	let elem = document.querySelectorAll('.tooltipped');
+// 	let instance = M.Tooltip.init(elem);
+// 	let options = {
+// 		enterDelay: 200
+// 	}
 
-	// 	elem.forEach(element => {
-	// 		instance = M.Tooltip.init(element, options);
-	// 	}, options);
+// 	elem.forEach(element => {
+// 		instance = M.Tooltip.init(element, options);
+// 	}, options);
 
-	// 	let elem2 = document.querySelector('.sidenav');
-	// 	let instance2 = M.Sidenav.init(elem2);
-	// }
+// 	let elem2 = document.querySelector('.sidenav');
+// 	let instance2 = M.Sidenav.init(elem2);
+// }
+
+// console.log(navigator.language)
+// console.log(window.navigator.languages)
