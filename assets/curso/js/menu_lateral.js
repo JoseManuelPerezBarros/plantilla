@@ -14,27 +14,35 @@
 //         document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_left';
 //     }
 // });
-window.addEventListener('resize', () => {console.log(innerWidth)});
-document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
-    console.log(document.getElementById('slide-out').style.transform.match(/\d+/i));
-    let posMenu = document.getElementById('slide-out').style.transform.match(/\d+/i);
-    console.log(typeof innerWidth) //Tamaño ventana
-    console.log(window.screen.width) //Tamaño pantalla
-    //e.stopImmediatePropagation();
-    //document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
+window.addEventListener('resize', () => {
+    //console.log(innerWidth)
     if (innerWidth <= 992) {
-
-    } else {
-
-    }
-    if (!posMenu || posMenu[0] == 0) {
-        console.log("hola mundo");
-        document.getElementById('slide-out').style.transform = 'translateX(-105%)';
         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
     } else {
-        document.getElementById('slide-out').style.transform = 'translateX(0)';
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
     }
+});
+document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
+
+    e.stopImmediatePropagation();
+    console.log("abierto");
+    console.log(slide);
+    //slide.isOpen ? slide.close() : slide.open()
+    if (slide.isOpen) {
+        document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
+        slide.close();
+
+    } else if (!slide.isOpen && innerWidth <= 992) {
+        slide.open();
+
+    } else if (!slide.isOpen && innerWidth > 992) {
+        slide.open();
+        document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+
+    } else {
+        console.log("Error");
+    }
+
 });
 
 let lista = cur.lista;
@@ -55,6 +63,9 @@ cur.temas.forEach((tema, index) => {
 
 
 function setTema(elemen) {
+
+    if(innerWidth <= 992) slide.close();
+
     let ruta = this.getAttribute('data-ruta');
     let indice = this.getAttribute('data-index');
     let tema = cur.getRutaCompleta(ruta);

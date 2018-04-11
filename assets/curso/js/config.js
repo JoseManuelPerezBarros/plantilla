@@ -1,3 +1,16 @@
+let elem = document.querySelectorAll('.tooltipped');
+let instance = M.Tooltip.init(elem);
+let options = {
+	enterDelay: 200
+}
+
+elem.forEach(element => {
+	instance = M.Tooltip.init(element, options);
+}, options);
+
+var elem2 = document.getElementById("slide-out");
+var slide = M.Sidenav.init(elem2);
+
 let infocurso = {
 	'nombre_curso': 'nombre_curso_prueba',
 	'descripcion': 'descripcion',
@@ -166,7 +179,13 @@ class Curso {
 		this.temaProgreso = [];
 		this.numTemas = this.ordenayCuenta(this.temas, true);
 		this.indexTemas = 0;
-		M.AutoInit();
+		//this.slide = this.menu;
+		//M.AutoInit();
+	}
+
+	get menu() {
+		let elem = document.getElementById("slide-out");
+		return M.Sidenav.init(elem);
 	}
 
 	get curso() {
@@ -354,3 +373,8 @@ var cur = new Curso();
 
 // console.log(navigator.language)
 // console.log(window.navigator.languages)
+
+/*  console.log(document.getElementById('slide-out').style.transform.match(/\d+/i));
+    let posMenu = document.getElementById('slide-out').style.transform.match(/\d+/i);
+    console.log(typeof innerWidth) //Tamaño ventana
+    console.log(window.screen.width) //Tamaño pantalla */
