@@ -2,7 +2,7 @@
     document.getElementsByClassName('col')[0].classList.toggle('flow-text'));*/
 let contenido = document.querySelector('.contenido');
 let mas = document.querySelector('.aumenta');
-let menos = document.querySelector('.disminuye')
+let menos = document.querySelector('.disminuye');
 
 if (contenido.style.fontSize == '') {
     menos.classList.add('disabled');

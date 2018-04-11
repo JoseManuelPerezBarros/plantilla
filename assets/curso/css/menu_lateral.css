@@ -24,6 +24,10 @@ iframe {
 .btn-large:hover {
   background-color: var(--main-color);
 }
+.sidenav-trigger
+{
+  margin: 10px 0px 0px 10px;
+}
 
 #slide-out {
   max-height: 100%;

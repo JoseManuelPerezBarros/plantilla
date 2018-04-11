@@ -225,7 +225,6 @@ class Curso {
 
 			tema.subtemas.forEach((subtema, subindex) => {
 				let subelemento = this.crearElementoLista(subtema, `${padre}-${subindex}`);
-				//subelemento.onclick = setTema;
 				subelemento.addEventListener('click', setTema);
 				sublista.appendChild(subelemento);
 				if (subtema.subtemas && subtema.subtemas.length > 0) {
@@ -317,7 +316,6 @@ class Curso {
 				cont += this.ordenayCuenta(temas[i].subtemas, ordenar);
 			}
 		}
-
 		if (ordenar) temas.sort((a, b) => a.id - b.id);
 		return cont;
 	}
@@ -340,6 +338,7 @@ var cur = new Curso();
 //DONE funcion ruta completa
 //DONE actualizarnumpagina data-indexTotal y data-ruta
 //SCORM
+//TO-DO Hacer flotante y fixed el boton de abrir/cerrar sidenav
 
 //Código Desechado
 
@@ -354,7 +353,9 @@ var cur = new Curso();
 
 //Expresion regular lineas sin ;
 // ^.+[^{},;]$
-//^.+[^\?:{},;]$
+// ^.+[^\?:{},;]$
+// ^[^/]{2}.+[^{},/\[\?:;]$
+// ^[^/]{1,2}.+[^{,/\[\?:;]$
 
 // materialice() {
 // 	let elem = document.querySelectorAll('.tooltipped');
@@ -371,10 +372,27 @@ var cur = new Curso();
 // 	let instance2 = M.Sidenav.init(elem2);
 // }
 
-// console.log(navigator.language)
-// console.log(window.navigator.languages)
+// console.log(navigator.language);
+// console.log(window.navigator.languages);
 
 /*  console.log(document.getElementById('slide-out').style.transform.match(/\d+/i));
     let posMenu = document.getElementById('slide-out').style.transform.match(/\d+/i);
     console.log(typeof innerWidth) //Tamaño ventana
-    console.log(window.screen.width) //Tamaño pantalla */
+	console.log(window.screen.width) //Tamaño pantalla */
+
+// document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', () => {
+//     console.log(window.innerWidth);
+//     console.log(window.screen.width);
+//     document.getElementsByClassName('sidenav')[0].classList.toggle('hide');
+//     document.getElementsByClassName('sidenav-trigger')[0].classList.toggle('pulse');
+//     if (document.getElementsByTagName('main')[0].style.paddingLeft == '300px' || document.getElementsByTagName('main')[0].style.paddingLeft == '') {
+//         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
+//     } else {
+//         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+//     }
+//     if (document.querySelector('.sidenav-trigger .material-icons').textContent == 'keyboard_arrow_left') {
+//         document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_right';
+//     } else {
+//         document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_left';
+//     }
+// });
