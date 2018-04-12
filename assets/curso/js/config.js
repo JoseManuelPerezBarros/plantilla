@@ -2,7 +2,7 @@ let elem = document.querySelectorAll('.tooltipped');
 let options = {
 	enterDelay: 200,
 	margin: -2
-}
+};
 
 elem.forEach(element => {
 	var instance = M.Tooltip.init(element, options);
@@ -271,6 +271,7 @@ class Curso {
 
 		return li;
 	}
+
 	actualizanumpag(pagina) {
 		let pag = document.querySelector('.numpag p');
 		pag.textContent = `${pagina}/${this.numTemas}`;
@@ -323,6 +324,7 @@ class Curso {
 
 var cur = new Curso();
 
+//console.log(navigator.userAgent)
 //FUNCIONA sin esto; quitar del array los antiguos con array.splice
 //FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
 //TO-DO mejor responsive, 480px

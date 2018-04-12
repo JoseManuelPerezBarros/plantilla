@@ -3,10 +3,9 @@ window.addEventListener('resize', () => {
         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
     } else {
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
-        if(document.querySelector('.sidenav-overlay').style.display=='block')
-        {
-            document.querySelector('.sidenav-overlay').style.display='none';
-            document.querySelector('.sidenav-overlay').style.opacity='0';
+        if (document.querySelector('.sidenav-overlay').style.display == 'block') {
+            document.querySelector('.sidenav-overlay').style.display = 'none';
+            document.querySelector('.sidenav-overlay').style.opacity = '0';
         }
     }
 });
@@ -33,10 +32,12 @@ cur.temas.forEach((tema, index) => {
     lista.appendChild(elemento);
     cur.crearSubtemas(tema, lista, index);
     elemento.addEventListener('click', setTema);
-    if (index == 0) {
-        elemento.click();
-    }
+    /*  if (index == 0) {
+         elemento.click();
+     } */
 });
+
+lista.firstElementChild.click();
 
 function setTema() {
 
