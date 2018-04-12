@@ -8,7 +8,6 @@ window.addEventListener('resize', () => {
             document.querySelector('.sidenav-overlay').style.display='none';
             document.querySelector('.sidenav-overlay').style.opacity='0';
         }
-        //slide.close()
     }
 });
 document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
