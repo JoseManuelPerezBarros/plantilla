@@ -3,6 +3,12 @@ window.addEventListener('resize', () => {
         document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
     } else {
         document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+        if(document.querySelector('.sidenav-overlay').style.display=='block')
+        {
+            document.querySelector('.sidenav-overlay').style.display='none';
+            document.querySelector('.sidenav-overlay').style.opacity='0';
+        }
+        //slide.close()
     }
 });
 document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
@@ -35,7 +41,8 @@ cur.temas.forEach((tema, index) => {
 
 function setTema() {
 
-    if (innerWidth <= 992 && slide.isOpen) slide.close();
+    if (innerWidth <= 992 && slide.isOpen)
+        document.getElementsByClassName('sidenav-trigger')[0].click();
 
     let ruta = this.getAttribute('data-ruta');
     let indice = this.getAttribute('data-index');
@@ -57,9 +64,6 @@ function setTema() {
             'ruta': ruta,
             'activo': true
         });
-        let o = {
-            'sa': 4
-        }
 
         if (cur.temaProgreso.length > 1 && !cur.temaCompletado.includes(cur.temaProgreso[cur.temaProgreso.length - 2].indice)) {
             cur.temaProgreso[cur.temaProgreso.length - 2].activo = false;

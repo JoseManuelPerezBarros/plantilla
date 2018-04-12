@@ -24,10 +24,16 @@ iframe {
 .btn-large:hover {
   background-color: var(--main-color);
 }
-.sidenav-trigger
-{
-  margin: 10px 0px 0px 10px;
+
+.sidenav-trigger {
+  margin: 5px 0px 0px 5px;
+  position: fixed;
+  opacity: 0.8;
 }
+
+/* .sidenav-trigger .material-icons {
+  opacity: 0.5;
+} */
 
 #slide-out {
   max-height: 100%;

@@ -1,11 +1,11 @@
 let elem = document.querySelectorAll('.tooltipped');
-let instance = M.Tooltip.init(elem);
 let options = {
-	enterDelay: 200
+	enterDelay: 200,
+	margin: -2
 }
 
 elem.forEach(element => {
-	instance = M.Tooltip.init(element, options);
+	var instance = M.Tooltip.init(element, options);
 }, options);
 
 var elem2 = document.getElementById("slide-out");
@@ -339,6 +339,7 @@ var cur = new Curso();
 //DONE actualizarnumpagina data-indexTotal y data-ruta
 //SCORM
 //TO-DO Hacer flotante y fixed el boton de abrir/cerrar sidenav
+//view-source:https://www.google.es
 
 //Código Desechado
 
