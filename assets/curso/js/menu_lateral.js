@@ -5,9 +5,6 @@ cur.temas.forEach((tema, index) => {
     lista.appendChild(elemento);
     cur.crearSubtemas(tema, lista, index);
     elemento.addEventListener('click', setTema);
-    /*  if (index == 0) {
-         elemento.click();
-     } */
 });
 
 lista.firstElementChild.click();

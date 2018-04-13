@@ -345,20 +345,20 @@ var cur = new Curso();
 //console.log(navigator.userAgent)
 //FUNCIONA sin esto; quitar del array los antiguos con array.splice
 //FUNCIONA sin esto; quitar del array lo que ya son completados y no entran aqui
-//TO-DO mejor responsive, 480px
+//FUNCIONA mejor responsive, 480px
 //DONE cursor pointer, tooltips botones control
 //DONE Añadir check indeterminado naranja cuando se accedió pero no se acabó
 //DONE Varios tamaños de letra texto contenido
 //TO-DO Varios tamaños letra encabezados
 //TO-DO aria-labels
 //DONE Subtemas
-//TO-DO Usar clearTimeOut
+//DESCARTADO Usar clearTimeOut
 //TO-DO Tutorial materialize css
 //DONE Funcional con subtemas recursivos ?
 //DONE funcion ruta completa
 //DONE actualizarnumpagina data-indexTotal y data-ruta
 //SCORM
-//TO-DO Hacer flotante y fixed el boton de abrir/cerrar sidenav
+//FUNCIONA Hacer flotante y fixed el boton de abrir/cerrar sidenav
 //view-source:https://www.google.es
 
 //Código Desechado
@@ -417,3 +417,7 @@ var cur = new Curso();
 //         document.querySelector('.sidenav-trigger .material-icons').textContent = 'keyboard_arrow_left';
 //     }
 // });
+
+/*  if (index == 0) {
+     elemento.click();
+ } */
