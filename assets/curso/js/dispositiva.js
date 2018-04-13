@@ -9,11 +9,9 @@ if (contenido.style.fontSize == '') {
 }
 
 mas.addEventListener('click', () => {
-    //console.log(contenido.style.fontSize);
     menos.classList.remove('disabled');
     if (contenido.style.fontSize.substr(-2) == 'em') {
         contenido.style.fontSize = (parseFloat(contenido.style.fontSize.match(/^\d{1}(\.\d{1,2})?/)) + 0.1).toFixed(1) + 'em';
-        //console.log((parseFloat(contenido.style.fontSize.match(/^\d{1}(\.\d{1,2})?/)) + parseFloat(0.1)).toFixed(1));
         if (parseFloat(contenido.style.fontSize.match(/^\d{1}(\.\d{1,2})?/)) >= 3.0) {
             mas.classList.add('disabled');
         }

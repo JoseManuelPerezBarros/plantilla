@@ -1,30 +1,3 @@
-window.addEventListener('resize', () => {
-    if (innerWidth <= 992) {
-        document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
-    } else {
-        document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
-        if (document.querySelector('.sidenav-overlay').style.display == 'block') {
-            document.querySelector('.sidenav-overlay').style.display = 'none';
-            document.querySelector('.sidenav-overlay').style.opacity = '0';
-        }
-    }
-});
-document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
-
-    e.stopImmediatePropagation();
-    if (slide.isOpen) {
-        slide.close();
-        document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
-    } else if (!slide.isOpen && innerWidth <= 992) {
-        slide.open();
-    } else if (!slide.isOpen && innerWidth > 992) {
-        slide.open();
-        document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
-    } else {
-        console.error("Error")
-    }
-});
-
 let lista = cur.lista;
 
 cur.temas.forEach((tema, index) => {
@@ -78,58 +51,79 @@ function setTema() {
         document.querySelector('.card-title').textContent = tema.nombre;
         cur.actualizanumpag(parseInt(cur.ultimoClick) + 1);
         cur.gestionaTiempo(this, cur.temaProgreso[cur.temaProgreso.length - 1]);
-
-        if (cur.ultimoClick == 0) {
-            document.querySelector('.anterior').classList.add('disabled');
-            document.querySelector('.principio').classList.add('disabled');
-        } else {
-            document.querySelector('.anterior').classList.remove('disabled');
-            document.querySelector('.principio').classList.remove('disabled');
-        }
-
-        if (cur.ultimoClick == cur.numTemas - 1) {
-            document.querySelector('.siguiente').classList.add('disabled');
-            document.querySelector('.final').classList.add('disabled');
-        } else {
-            document.querySelector('.siguiente').classList.remove('disabled');
-            document.querySelector('.final').classList.remove('disabled');
-        }
+        cur.gestionaBotones();
     }
 }
 
-document.querySelector('.anterior').addEventListener('click', () => {
+window.addEventListener('load', () => {
+    document.querySelector('.anterior').addEventListener('click', () => {
 
-    if (cur.ultimoClick > 0) {
-        lista.querySelector(`li[data-index="${cur.ultimoClick-1}"]`).click();
-    }
-});
+        if (cur.ultimoClick > 0) {
+            lista.querySelector(`li[data-index="${cur.ultimoClick-1}"]`).click();
+        }
+    });
 
-document.querySelector('.siguiente').addEventListener('click', () => {
+    document.querySelector('.siguiente').addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.numTemas - 1) {
-        lista.querySelector(`li[data-index="${cur.ultimoClick+1}"]`).click();
-    }
-});
+        if (cur.ultimoClick < cur.numTemas - 1) {
+            lista.querySelector(`li[data-index="${cur.ultimoClick+1}"]`).click();
+        }
+    });
 
-document.addEventListener('keyup', (e) => {
+    document.addEventListener('keyup', (e) => {
 
-    if (e.keyCode == 39 || e.which == 39) {
-        document.querySelector('.siguiente').click();
-    } else if (e.keyCode == 37 || e.which == 37) {
-        document.querySelector('.anterior').click();
-    }
-});
+        if (e.keyCode == 39 || e.which == 39) {
+            document.querySelector('.siguiente').click();
+        } else if (e.keyCode == 37 || e.which == 37) {
+            document.querySelector('.anterior').click();
+        }
+    });
 
-document.querySelector('.principio').addEventListener('click', () => {
+    window.addEventListener('scroll', (e) => {
 
-    if (cur.ultimoClick > 0) {
-        lista.getElementsByTagName('li').item(0).click();
-    }
-});
+        if (e.keyCode == 39 || e.which == 39 || e.keyCode == 37 || e.which == 37) {
+            window.scrollTo(0, scrollY);
+        }
+    });
 
-document.querySelector('.final').addEventListener('click', () => {
+    document.querySelector('.principio').addEventListener('click', () => {
 
-    if (cur.ultimoClick < cur.numTemas) {
-        lista.querySelector(`li[data-index="${cur.numTemas -1}"]`).click();
-    }
+        if (cur.ultimoClick > 0) {
+            lista.getElementsByTagName('li').item(0).click();
+        }
+    });
+
+    document.querySelector('.final').addEventListener('click', () => {
+
+        if (cur.ultimoClick < cur.numTemas) {
+            lista.querySelector(`li[data-index="${cur.numTemas -1}"]`).click();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (innerWidth <= 992) {
+            document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
+        } else {
+            document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+            if (document.querySelector('.sidenav-overlay').style.display == 'block') {
+                document.querySelector('.sidenav-overlay').style.display = 'none';
+                document.querySelector('.sidenav-overlay').style.opacity = '0';
+            }
+        }
+    });
+    document.getElementsByClassName('sidenav-trigger')[0].addEventListener('click', (e) => {
+
+        e.stopImmediatePropagation();
+        if (slide.isOpen) {
+            slide.close();
+            document.getElementsByTagName('main')[0].style.paddingLeft = '0px';
+        } else if (!slide.isOpen && innerWidth <= 992) {
+            slide.open();
+        } else if (!slide.isOpen && innerWidth > 992) {
+            slide.open();
+            document.getElementsByTagName('main')[0].style.paddingLeft = '300px';
+        } else {
+            console.error("Error")
+        }
+    });
 });

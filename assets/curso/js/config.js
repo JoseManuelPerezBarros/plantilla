@@ -320,6 +320,24 @@ class Curso {
 		if (ordenar) temas.sort((a, b) => a.id - b.id);
 		return cont;
 	}
+
+	gestionaBotones() {
+		if (this.ultimoClick == 0) {
+			document.querySelector('.anterior').classList.add('disabled');
+			document.querySelector('.principio').classList.add('disabled');
+		} else {
+			document.querySelector('.anterior').classList.remove('disabled');
+			document.querySelector('.principio').classList.remove('disabled');
+		}
+
+		if (this.ultimoClick == this.numTemas - 1) {
+			document.querySelector('.siguiente').classList.add('disabled');
+			document.querySelector('.final').classList.add('disabled');
+		} else {
+			document.querySelector('.siguiente').classList.remove('disabled');
+			document.querySelector('.final').classList.remove('disabled');
+		}
+	}
 }
 
 var cur = new Curso();
