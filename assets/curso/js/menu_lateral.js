@@ -69,9 +69,9 @@ window.addEventListener('load', () => {
 
     document.addEventListener('keyup', (e) => {
 
-        if (e.keyCode == 39 || e.which == 39) {
+        if (e.key == "ArrowRight") {
             document.querySelector('.siguiente').click();
-        } else if (e.keyCode == 37 || e.which == 37) {
+        } else if (e.key == "ArrowLeft") {
             document.querySelector('.anterior').click();
         }
     });
